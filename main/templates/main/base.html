@@ -1,0 +1,86 @@
+{% load static %}
+
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+        <title>{{title}}</title>
+
+        <link rel="shortcut icon" href="{% static 'main/img/logo.png' %}" type="image/x-icon">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800;900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+
+        {% block styles %}{% endblock %}
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg menu">
+                    <div class="container-fluid">
+                        <h3 class="title">IT-Cube Hogwarts <i class="bi bi-code-square" style="font-size: 29px;"></i></h3>
+
+                        <button class="navbar-toggler navbar-dark menu__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar__content" aria-controls="navbar__content" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbar__content">
+                            <ul class="navbar-nav ms-auto menu__nav">
+                                <li class="nav-item menu__link">
+                                    <a class="nav-link" href="{% url 'home' %}">Главная <i class="bi bi-house-door"></i></a>
+                                </li>
+                                <li class="nav-item menu__link">
+                                    <a class="nav-link" href="#">Теория <i class="bi bi-lightbulb"></i></a>
+                                </li>
+                                <li class="nav-item menu__link">
+                                    <a class="nav-link" href="#">Задачи <i class="bi bi-journal-code"></i></a>
+                                </li>
+                                <li class="nav-item menu__link">
+                                    <a class="nav-link" href="#">Рейтинг <i class="bi bi-bar-chart-line"></i></a>
+                                </li>
+                                <li class="nav-item menu__link">
+                                    <a class="nav-link" href="#">Битвы <i class="bi bi-braces"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+
+        <footer class="footer fixed-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="info">
+                            <p class="info__license">© IT-Cube Hogwarts 2022</p>
+                            <p class="info__creator">Created by Hallteon</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 ms-auto">
+                        <div class="soc-nets d-flex justify-content-between">
+                            <a href="#" class="soc-nets__link"><i class="bi bi-instagram"></i></a>
+                            <a href="#" class="soc-nets__link"><i class="bi bi-telegram"></i></a>
+                            <a href="#" class="soc-nets__link"><i class="bi bi-discord"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>

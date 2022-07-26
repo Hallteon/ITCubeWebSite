@@ -1,0 +1,73 @@
+/* Спецификация */
+
+body {
+    color: #0C1A22;
+    font-family: 'Inter', sans-serif;
+}
+
+ul, li {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+/* Навбар */
+
+.header {
+    background-color: #fbbe3a;
+}
+
+.title {
+    color: #0C1A22;
+    font-weight: 800;
+}
+
+.menu__btn {
+    background-color: #fbbe3a;
+}
+
+.menu__nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.menu__link a {
+    color: #0C1A22;
+    font-size: 20px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.menu__link a:hover {
+    color: greenyellow;
+}
+
+/* Футер */
+
+.footer {
+    background-color: #313030;
+}
+
+.info {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.soc-nets {
+    margin-top: 16px;
+}
+
+.soc-nets__link {
+    color: #fff;
+    font-size: 38px;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.soc-nets__link:hover {
+    color: #fbbe3a;
+}
+
