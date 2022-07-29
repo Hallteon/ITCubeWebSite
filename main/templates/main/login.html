@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block styles %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'main/css/authorization.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="login">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 authorization-container">
+                <h2 class="text-center authorization__title">Авторизация</h2>
+
+                <form class="authorization-form" method="post">
+                    {% csrf_token %}
+
+                    <div class="text-center authorization-form__errors">{{form.non_field_errors}}</div>
+
+                    {% for item in form %}
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="authorization-form__label" for="{{item.id_for_label}}">{{item.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            {{item}}
+                        </div>
+                    </div>
+
+                    <div class="authorization-form__errors">{{item.errors}}</div>
+
+                    {% endfor %}
+
+                    <button class="authorization-form__btn" type="submit">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

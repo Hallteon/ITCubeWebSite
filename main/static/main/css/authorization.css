@@ -1,0 +1,46 @@
+.authorization-container {
+    border: 6px solid #0C1A22;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.authorization__title {
+    font-weight: 600;
+}
+
+.authorization-form {
+    margin-top: 30px;
+}
+
+.authorization-form__label {
+    font-weight: 500;
+}
+
+.authorization-form__input {
+    margin-bottom: 20px;
+}
+
+.authorization-form__input_captcha {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.authorization-form__btn {
+    display: block;
+    font-weight: 500;
+    border: 5px solid #e3e6ea;
+    border-radius: 20px;
+    margin: 20px auto auto;
+    padding: 10px;
+    width: 80%;
+    transition: 0.5s;
+}
+
+.authorization-form__btn:hover {
+    background-color: #fbbe3a;
+}
+
+.authorization-form__errors {
+    color: #ff2121;
+}

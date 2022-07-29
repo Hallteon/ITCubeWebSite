@@ -7,8 +7,6 @@ body {
 
 ul, li {
     display: block;
-    padding: 0;
-    margin: 0;
 }
 
 /* Навбар */
@@ -17,7 +15,7 @@ ul, li {
     background-color: #fbbe3a;
 }
 
-.title {
+.menu__title {
     color: #0C1A22;
     font-weight: 800;
 }
@@ -26,12 +24,7 @@ ul, li {
     background-color: #fbbe3a;
 }
 
-.menu__nav {
-    display: flex;
-    justify-content: space-between;
-}
-
-.menu__link a {
+.menu__link, .menu__link_icon {
     color: #0C1A22;
     font-size: 20px;
     font-weight: 800;
@@ -39,8 +32,27 @@ ul, li {
     transition: 0.5s;
 }
 
-.menu__link a:hover {
-    color: greenyellow;
+.menu__link:hover {
+    color: white !important;
+}
+
+.profile__btn {
+    display: block;
+    background-color: #fbbe3a;
+    font-weight: 500;
+    border: 3px solid #fbbe3a;
+    border-radius: 20px;
+    padding: 5px;
+    width: 100%;
+    transition: 0.5s;
+}
+
+.profile__btn:hover {
+    border-color: #e3e6ea;
+}
+
+.profile__link {
+    font-weight: 500;
 }
 
 /* Футер */
@@ -70,4 +82,3 @@ ul, li {
 .soc-nets__link:hover {
     color: #fbbe3a;
 }
-
