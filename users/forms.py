@@ -24,10 +24,8 @@ class RegisterUserForm(UserCreationForm):
 class LoginUserForm(AuthenticationForm):
     username = forms.CharField(label="Имя пользователя", widget=forms.TextInput(attrs={'class': 'form-control form-input authorization-form__input',
                                                                                        'placeholder': 'Введите ваше имя'}))
-    email = forms.CharField(label="Почта", widget=forms.EmailInput(attrs={'class': 'form-control form-input authorization-form__input',
-                                                                          'placeholder': 'Введите вашу почту'}))
     password = forms.CharField(label="Пароль", widget=forms.PasswordInput(attrs={'class': 'form-control form-input authorization-form__input',
                                                                                   'placeholder': 'Введите пароль'}))
 
     class Meta:
-        fields = ('username', 'email', 'password')
+        fields = ('username', 'password')
