@@ -1,0 +1,42 @@
+.articles-header {
+    background-color: #fff;
+    padding-top: 15px;
+}
+
+.articles-navbar__item {
+    font-weight: 500;
+}
+
+.articles-container {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 25px auto auto;
+}
+
+.articles-container:first-child {
+    margin-top: 50px;
+}
+
+.articles-container:last-child {
+    margin-bottom: 50px;
+}
+
+.articles-container__author {
+    font-weight: 600;
+}
+
+.articles-container__time {
+    color: #777;
+}
+
+.articles-container__title {
+    font-weight: 800;
+}
+
+.articles-container__content {
+}
+
+.articles-container__btn {
+    display: inline-block;
+}

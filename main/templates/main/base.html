@@ -40,6 +40,9 @@
                                     <a class="nav-link menu__link" href="{% url 'home' %}">Главная <i class="bi bi-house-door"></i></a>
                                 </li>
                                 <li class="nav-item menu__item">
+                                    <a class="nav-link menu__link" href="{% url 'articles' %}">Статьи <i class="bi bi-blockquote-right"></i></a>
+                                </li>
+                                <li class="nav-item menu__item">
                                     <a class="nav-link menu__link" href="#">Теория <i class="bi bi-lightbulb"></i></a>
                                 </li>
                                 <li class="nav-item menu__item">
@@ -47,9 +50,6 @@
                                 </li>
                                 <li class="nav-item menu__item">
                                     <a class="nav-link menu__link" href="#">Рейтинг <i class="bi bi-bar-chart-line"></i></a>
-                                </li>
-                                <li class="nav-item menu__item">
-                                    <a class="nav-link menu__link" href="#">Битвы <i class="bi bi-braces"></i></a>
                                 </li>
 
                                 {% if request.user.is_authenticated %}
@@ -86,7 +86,7 @@
         {% block content %}
         {% endblock %}
 
-        <footer class="footer fixed-bottom">
+        <footer class="footer">
             <div class="container">
                 <div class="row d-flex justify-content-between">
                     <div class="col-sm-8 col-md-5 col-lg-4">

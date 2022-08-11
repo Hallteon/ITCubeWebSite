@@ -1,4 +1,7 @@
 Django==4.0.6
 environs==9.5.0
 django-simple-captcha==0.5.17
+django-mptt==0.13.4
+django-mptt-admin==2.3.0
+
 

@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'main/css/authorization.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
 
 {% endblock %}
 
@@ -16,30 +16,30 @@
 <section class="login">
     <div class="container">
         <div class="row d-flex justify-content-center">
-            <div class="col-lg-6 authorization-container">
-                <h2 class="text-center authorization__title">Авторизация</h2>
+            <div class="col-lg-6 form-container">
+                <h2 class="text-center forms-container__title">Авторизация</h2>
 
-                <form class="authorization-form" method="post">
+                <form class="form" method="post">
                     {% csrf_token %}
 
-                    <div class="text-center authorization-form__errors">{{form.non_field_errors}}</div>
+                    <div class="text-center form__errors">{{form.non_field_errors}}</div>
 
                     {% for item in form %}
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <label class="authorization-form__label" for="{{item.id_for_label}}">{{item.label}}: </label>
+                            <label class="form__label" for="{{item.id_for_label}}">{{item.label}}: </label>
                         </div>
                         <div class="col-sm-8">
                             {{item}}
                         </div>
                     </div>
 
-                    <div class="authorization-form__errors">{{item.errors}}</div>
+                    <div class="form__errors">{{item.errors}}</div>
 
                     {% endfor %}
 
-                    <button class="authorization-form__btn" type="submit">Войти</button>
+                    <button class="form__btn btn" type="submit">Войти</button>
                 </form>
             </div>
         </div>

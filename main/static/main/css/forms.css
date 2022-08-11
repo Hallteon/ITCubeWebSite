@@ -1,0 +1,44 @@
+.form-container {
+    background-color: #fff;
+    border: 6px solid #0C1A22;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 20px;
+}
+
+.form-container__title {
+    font-weight: 600;
+}
+
+.form {
+    margin-top: 30px;
+}
+
+.form__label {
+    font-weight: 500;
+}
+
+.form__input {
+    margin-bottom: 20px;
+}
+
+.form__input_captcha {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.form__btn {
+    margin: 20px auto auto;
+    width: 80%;
+}
+
+.form__errors {
+    color: #ff2121;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

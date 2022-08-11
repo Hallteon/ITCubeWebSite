@@ -2,16 +2,37 @@
 
 body {
     color: #0C1A22;
+    background-color: #f0f0f0;
     font-family: 'Inter', sans-serif;
 }
 
 ul, li {
     display: block;
+    padding-left: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    display: block;
+    font-weight: 500;
+    border: 5px solid #e3e6ea;
+    border-radius: 20px;
+    padding: 10px;
+    transition: 0.5s;
+}
+
+.btn:hover {
+    background-color: #f7c547;
 }
 
 /* Навбар */
 
 .header {
+    position: sticky;
+    top: 0;
     background-color: #fbbe3a;
 }
 
@@ -28,7 +49,6 @@ ul, li {
     color: #0C1A22;
     font-size: 20px;
     font-weight: 800;
-    text-decoration: none;
     transition: 0.5s;
 }
 
@@ -43,7 +63,7 @@ ul, li {
     border: 3px solid #fbbe3a;
     border-radius: 20px;
     padding: 5px;
-    width: 100%;
+    width: 60px;
     transition: 0.5s;
 }
 
