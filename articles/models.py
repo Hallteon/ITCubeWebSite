@@ -7,7 +7,7 @@ from mptt.models import TreeForeignKey, MPTTModel
 class Article(models.Model):
     username = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name='Автор')
     title = models.CharField(max_length=350, verbose_name='Заголовок')
-    image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=False, verbose_name='Изображение')
+    cover_image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=False, verbose_name='Обложка')
     content = models.TextField(verbose_name='Текст')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_time = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')

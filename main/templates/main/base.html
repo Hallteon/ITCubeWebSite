@@ -27,23 +27,20 @@
     <body>
         <header class="header">
             <div class="container">
-                <nav class="navbar navbar-expand-lg menu">
+                <nav class="navbar navbar-expand-xxl menu">
                     <div class="container-fluid">
                         <h3 class="menu__title">IT-Cube Hogwarts <i class="bi bi-box-fill" style="font-size: 29px;"></i></h3>
-                        <button class="navbar-toggler navbar-dark menu__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar__content" aria-controls="navbar__content" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler navbar-light shadow-none menu__btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbar__content" aria-controls="navbar__content" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
                         <div class="collapse navbar-collapse" id="navbar__content">
-                            <ul class="navbar-nav ms-auto menu__nav d-flex justify-content-between">
+                            <ul class="navbar-nav ms-auto menu__nav">
                                 <li class="nav-item menu__item">
                                     <a class="nav-link menu__link" href="{% url 'home' %}">Главная <i class="bi bi-house-door"></i></a>
                                 </li>
                                 <li class="nav-item menu__item">
                                     <a class="nav-link menu__link" href="{% url 'articles' %}">Статьи <i class="bi bi-blockquote-right"></i></a>
-                                </li>
-                                <li class="nav-item menu__item">
-                                    <a class="nav-link menu__link" href="#">Теория <i class="bi bi-lightbulb"></i></a>
                                 </li>
                                 <li class="nav-item menu__item">
                                     <a class="nav-link menu__link" href="#">Задачи <i class="bi bi-journal-code"></i></a>

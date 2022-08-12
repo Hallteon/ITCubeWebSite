@@ -8,7 +8,7 @@ body {
 
 ul, li {
     display: block;
-    padding-left: 0;
+    padding: 0;
 }
 
 a {
@@ -43,6 +43,13 @@ a {
 
 .menu__btn {
     background-color: #fbbe3a;
+    border: 4px solid #0C1A22;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.menu__btn:hover, .menu__btn:active {
+    background-color: #f7c547;
 }
 
 .menu__link, .menu__link_icon {
@@ -67,7 +74,7 @@ a {
     transition: 0.5s;
 }
 
-.profile__btn:hover {
+.profile__btn:hover, .profile__btn:focus {
     border-color: #e3e6ea;
 }
 

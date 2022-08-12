@@ -14,7 +14,7 @@
                     <ul class="d-flex justify-content-between articles-navbar">
                         <li class="articles-navbar__item"></li>
                         <li class="articles-navbar__item">
-                            <a href="#">
+                            <a href="{% url 'add_article' %}">
                                 <div class="btn">Написать статью <i class="bi bi-pencil"></i></div>
                             </a>
                         </li>
@@ -35,8 +35,8 @@
 
                     <h2 class="articles-container__title">{{article.title}}</h2>
 
-                    {% if article.image %}
-                    <img class="articles-container__image" src="{{article.image.url}}" alt="изображение статьи" width="100%">
+                    {% if article.cover_image %}
+                    <img class="articles-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
                     {% endif %}
 
                     {% autoescape on %}
@@ -44,6 +44,11 @@
                     {% endautoescape %}
 
                     <a class="articles-container__btn btn" href="{{article.get_absolute_url}}">Читать дальше</a>
+
+                    <ul class="d-flex articles-statistic">
+                        <li class="articles-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
+                        <li class="articles-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments_count}}</li>
+                    </ul>
                 </div>
         {% endfor %}
         </div>

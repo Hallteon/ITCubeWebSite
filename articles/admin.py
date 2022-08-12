@@ -5,12 +5,23 @@ from articles.models import Category, Article
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'create_time', 'image', 'is_published')
+    list_display = ('id', 'title', 'create_time', 'cover_image', 'is_published')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'create_time')
     prepopulated_fields = {"slug": ("title",)}
+
+    def save_form(self, request, obj, form, change):
+        if not change:
+            obj.author = request.user.username
+
+        super(ArticleAdmin, self).save_model(
+            request=request,
+            obj=obj,
+            form=form,
+            change=change
+        )
 
 
 class CategoryAdmin(DjangoMpttAdmin):
