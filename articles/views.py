@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
 from articles.forms import AddArticleForm
@@ -5,10 +7,10 @@ from articles.models import Article
 from utils.utils import DataMixin
 
 
-class AddArticle(DataMixin, CreateView):
+class AddArticle(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddArticleForm
     template_name = 'articles/add_article.html'
-    success_url = 'articles'
+    success_url = reverse_lazy('articles')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -16,10 +18,9 @@ class AddArticle(DataMixin, CreateView):
         return dict(list(context.items()) + list(c_def.items()))
 
     def form_valid(self, form):
-        instance = form.save(commit=False)
-        instance.username = self.request.user.username
-
-        instance.save()
+        obj = form.save(commit=False)
+        obj.username = self.request.user
+        obj.save()
 
         return super().form_valid(form)
 

@@ -12,17 +12,6 @@ class ArticleAdmin(admin.ModelAdmin):
     list_filter = ('is_published', 'create_time')
     prepopulated_fields = {"slug": ("title",)}
 
-    def save_form(self, request, obj, form, change):
-        if not change:
-            obj.author = request.user.username
-
-        super(ArticleAdmin, self).save_model(
-            request=request,
-            obj=obj,
-            form=form,
-            change=change
-        )
-
 
 class CategoryAdmin(DjangoMpttAdmin):
     list_display = ('id', 'name')
