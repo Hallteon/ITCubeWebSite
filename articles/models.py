@@ -2,17 +2,17 @@ from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
-from mptt.models import TreeForeignKey, MPTTModel
+from ckeditor.fields import RichTextField
 
 
 class Article(models.Model):
     username = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name='Автор')
     title = models.CharField(max_length=350, verbose_name='Заголовок')
-    cover_image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=False, verbose_name='Обложка')
-    content = models.TextField(verbose_name='Текст')
+    cover_image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, verbose_name='Обложка')
+    content = RichTextField(verbose_name='Текст')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_time = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
-    category = TreeForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
+    tags = models.ManyToManyField('Tag', verbose_name='Тэги')
     views_count = models.IntegerField(null=False, default=0, verbose_name='Количество просмотров')
     comments_count = models.IntegerField(null=False, default=0, verbose_name='Количество комментариев')
     slug = models.SlugField(max_length=250, unique=True, db_index=True, verbose_name='URL')
@@ -35,11 +35,24 @@ class Article(models.Model):
         verbose_name_plural = 'Статьи'
 
 
-class Category(MPTTModel):
+class Tag(models.Model):
     name = models.CharField(max_length=100, unique=True, db_index=True, verbose_name='Название')
-    parent = TreeForeignKey('self', on_delete=models.PROTECT, null=True, blank=True, related_name='children',
-                            db_index=True, verbose_name='Родительская категория')
+    category = models.ForeignKey('Category', on_delete=models.PROTECT, verbose_name='Категория')
+    slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name='URL')
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={'tag_slug': self.slug})
+
+    class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True, db_index=True, verbose_name='Название')
     slug = models.SlugField(max_length=200, unique=True, db_index=True, verbose_name='URL')
 
     def __str__(self):
@@ -48,11 +61,7 @@ class Category(MPTTModel):
     def get_absolute_url(self):
         return reverse('category', kwargs={'cat_slug': self.slug})
 
-    class MPTTMeta:
-        order_insertion_by = ['name']
-
     class Meta:
-        unique_together = [['parent', 'slug']]
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
 

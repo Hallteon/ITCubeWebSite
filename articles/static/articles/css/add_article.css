@@ -1,0 +1,14 @@
+.add-article {
+    margin-bottom: 50px;
+}
+
+.form__multiple {
+    margin-top: 30px;
+}
+
+.footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}

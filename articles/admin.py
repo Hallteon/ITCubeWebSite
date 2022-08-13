@@ -1,10 +1,11 @@
 from django.contrib import admin
-from django_mptt_admin.admin import DjangoMpttAdmin
 
-from articles.models import Category, Article
+from articles.forms import ArticleAdminForm
+from articles.models import Category, Article, Tag
 
 
 class ArticleAdmin(admin.ModelAdmin):
+    form = ArticleAdminForm
     list_display = ('id', 'title', 'create_time', 'cover_image', 'is_published')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'content')
@@ -13,7 +14,14 @@ class ArticleAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
 
-class CategoryAdmin(DjangoMpttAdmin):
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'category')
+    list_display_links = ('id', 'name', 'category')
+    search_fields = ('name',)
+    prepopulated_fields = {"slug": ("name",)}
+
+
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
     search_fields = ('name',)
@@ -21,4 +29,5 @@ class CategoryAdmin(DjangoMpttAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Tag, TagAdmin)
 admin.site.register(Category, CategoryAdmin)

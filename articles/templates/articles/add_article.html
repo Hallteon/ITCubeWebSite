@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'articles/css/add_article.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -10,25 +11,24 @@
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-lg-10 form-container">
-                <form class="form" method="post" enctype="multipart/form-data">
+                <form class="add-article-form form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <div class="text-center form__errors">{{form.non_field_errors}}</div>
 
-                    {% for item in form %}
-
                     <div class="row">
-                        <div class="col-sm-4">
-                            <label class="form__label" for="{{item.id_for_label}}">{{item.label}}: </label>
-                        </div>
-                        <div class="col-sm-8">
-                            {{item}}
-                        </div>
-                    </div>
+                    {% for item in form %}
+                            <div class="col-sm-4">
+                                <label class="form__label" for="{{item.id_for_label}}">{{item.label}}: </label>
+                            </div>
+                            <div class="col-sm-8">
+                                {{item}}
+                            </div>
 
                     <div class="form__errors">{{item.errors}}</div>
 
                     {% endfor %}
+                    </div>
 
                     <button class="form__btn btn" type="submit">Опубликовать статью</button>
                 </form>
@@ -37,4 +37,9 @@
     </div>
 </section>
 
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 {% endblock %}

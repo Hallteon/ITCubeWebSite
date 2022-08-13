@@ -23,6 +23,7 @@ from main.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('captcha/', include('captcha.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('', include('main.urls')),
     path('accounts/', include('users.urls')),
     path('articles/', include('articles.urls'))
