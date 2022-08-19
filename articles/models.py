@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf.global_settings import AUTH_USER_MODEL
 from django.db import models
 from django.template.defaultfilters import slugify
@@ -9,7 +10,7 @@ class Article(models.Model):
     username = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name='Автор')
     title = models.CharField(max_length=350, verbose_name='Заголовок')
     cover_image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, verbose_name='Обложка')
-    content = RichTextField(verbose_name='Текст')
+    content = RichTextUploadingField(verbose_name='Текст')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_time = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     tags = models.ManyToManyField('Tag', verbose_name='Тэги')

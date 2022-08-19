@@ -133,10 +133,35 @@ MEDIA_URL = '/media/'
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',
+        'toolbar': [
+            ['Undo', 'Redo',
+             '-', 'Bold', 'Italic', 'Underline',
+             '-', 'Link', 'Unlink', 'Anchor',
+             '-', 'Format',
+             '-', 'Maximize',
+             '-', 'Table',
+             '-', 'Image',
+             '-', 'Source',
+             '-', 'NumberedList', 'BulletedList'
+            ],
+            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
+             '-', 'Font', 'FontSize', 'TextColor',
+             '-', 'Outdent', 'Indent',
+             '-', 'HorizontalRule',
+             '-', 'Blockquote',
+             '-', 'CodeSnippet'
+            ]
+        ],
+        'codeSnippet_theme': 'monokai',
+        'extraPlugins': ','.join(
+                    [
+                        'codesnippet',
+                    ]),
         'height': 300,
         'width': '100%',
-    },
+        'toolbarCanCollapse': False,
+        'forcePasteAsPlainText': True
+    }
 }
 CKEDITOR_UPLOAD_PATH = "uploads/"
 

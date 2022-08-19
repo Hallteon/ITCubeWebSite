@@ -27,27 +27,27 @@
     <div class="container">
         <div class="row">
         {% for article in articles %}
-                <div class="col-sm-10 articles-container">
+                <div class="col-sm-10 article-container">
                     <ul class="d-flex justify-content-between">
-                        <li class="articles-container__author">{{article.username}}</li>
-                        <li class="articles-container__time">{{article.update_time|date:"d-m-Y H:i"}}</li>
+                        <li class="article-container__author">{{article.username}}</li>
+                        <li class="article-container__time">{{article.update_time|date:"d-m-Y H:i"}}</li>
                     </ul>
 
-                    <h2 class="articles-container__title">{{article.title}}</h2>
+                    <h2 class="article-container__title">{{article.title}}</h2>
 
                     {% if article.cover_image %}
-                    <img class="articles-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
+                    <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
                     {% endif %}
 
                     {% autoescape on %}
-                    <p class="articles-container__content">{{article.content|linebreaks|truncatewords:50}}</p>
+                    <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
                     {% endautoescape %}
 
-                    <a class="articles-container__btn btn" href="{{article.get_absolute_url}}">Читать дальше</a>
+                    <a class="article-container__btn btn" href="{{article.get_absolute_url}}">Читать дальше</a>
 
-                    <ul class="d-flex articles-statistic">
-                        <li class="articles-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
-                        <li class="articles-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments_count}}</li>
+                    <ul class="d-flex article-statistic">
+                        <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
+                        <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments_count}}</li>
                     </ul>
                 </div>
         {% endfor %}

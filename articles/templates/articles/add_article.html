@@ -17,17 +17,41 @@
                     <div class="text-center form__errors">{{form.non_field_errors}}</div>
 
                     <div class="row">
-                    {% for item in form %}
-                            <div class="col-sm-4">
-                                <label class="form__label" for="{{item.id_for_label}}">{{item.label}}: </label>
-                            </div>
-                            <div class="col-sm-8">
-                                {{item}}
-                            </div>
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.title.id_for_label}}">{{form.title.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            {{form.title}}
+                        </div>
+                        <div class="form__errors">{{form.title.errors}}</div>
 
-                    <div class="form__errors">{{item.errors}}</div>
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.cover_image.id_for_label}}">{{form.cover_image.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            {{form.cover_image}}
+                        </div>
+                        <div class="form__errors">{{form.cover_image.errors}}</div>
 
-                    {% endfor %}
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.content.id_for_label}}">{{form.content.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form__editor-textarea">{{form.content}}</div>
+                        </div>
+                        <div class="form__errors">{{form.content.errors}}</div>
+
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.tags.id_for_label}}">{{form.tags.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="row">
+                                {% for tag in form.tags %}
+                                <div class="col-sm-6 col-md-4 col-xl-3">{{tag}}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="form__errors">{{form.tags.errors}}</div>
                     </div>
 
                     <button class="form__btn btn" type="submit">Опубликовать статью</button>

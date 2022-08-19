@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'articles/css/article.css' %}">
+<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,20 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-10 article-container">
+                <ul class="d-flex justify-content-between">
+                    <li class="article-container__author">{{article.username}}</li>
+                    <li class="article-container__time">{{article.update_time|date:"d-m-Y H:i"}}</li>
+                </ul>
 
+                <h2 class="article-container__title">{{article.title}}</h2>
+
+                {% if article.cover_image %}
+                <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
+                {% endif %}
+
+                {% autoescape on %}
+                <p class="article-container__content">{{article.content|safe}}</p>
+                {% endautoescape %}
             </div>
         </div>
     </div>
