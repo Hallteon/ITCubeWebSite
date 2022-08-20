@@ -11,14 +11,21 @@
         <div class="row">
             <div class="col-12">
                 <div class="container">
-                    <ul class="d-flex justify-content-between articles-navbar">
-                        <li class="articles-navbar__item"></li>
-                        <li class="articles-navbar__item">
+                    <div class="row justify-content-between articles-navbar">
+                        <ul class="col-md-7 col-lg-10 col-xl-9 d-flex align-items-center justify-content-between categories">
+                            {% for category in categories %}
+                            <li class="categories__item">
+                                <a href="{{category.get_absolute_url}}">{{category.name}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <div class="col-md-4 col-lg-2 articles-funcs">
                             <a href="{% url 'add_article' %}">
-                                <div class="btn">Написать статью <i class="bi bi-pencil"></i></div>
+                                <div class="articles-funcs_button button">Написать статью <i class="bi bi-pencil"></i></div>
                             </a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -26,31 +33,33 @@
 
     <div class="container">
         <div class="row">
-        {% for article in articles %}
-                <div class="col-sm-10 article-container">
-                    <ul class="d-flex justify-content-between">
-                        <li class="article-container__author">{{article.username}}</li>
-                        <li class="article-container__time">{{article.update_time|date:"d-m-Y H:i"}}</li>
-                    </ul>
+            {% for article in articles %}
+            <div class="col-sm-10 article-container">
+                <ul class="d-flex justify-content-between article-inform">
+                    <li class="article-inform__author">{{article.username}}</li>
+                    <li class="article-inform__time">{{article.update_time|date:"d-m-Y H:i"}}</li>
+                </ul>
 
+                <a href="{{article.get_absolute_url}}">
                     <h2 class="article-container__title">{{article.title}}</h2>
+                </a>
 
-                    {% if article.cover_image %}
-                    <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
-                    {% endif %}
+                {% if article.cover_image %}
+                <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
+                {% endif %}
 
-                    {% autoescape on %}
-                    <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
-                    {% endautoescape %}
+                {% autoescape on %}
+                <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
+                {% endautoescape %}
 
-                    <a class="article-container__btn btn" href="{{article.get_absolute_url}}">Читать дальше</a>
+                <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>
 
-                    <ul class="d-flex article-statistic">
-                        <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
-                        <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments_count}}</li>
-                    </ul>
-                </div>
-        {% endfor %}
+                <ul class="d-flex article-statistic">
+                    <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
+                    <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments_count}}</li>
+                </ul>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </section>

@@ -1,10 +1,31 @@
 .articles-header {
     background-color: #fff;
     padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .articles-navbar__item {
     font-weight: 500;
+}
+
+.categories {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.categories__item {
+    padding-right: 15px;
+}
+
+.categories__item a {
+    color: #0C1A22;
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.categories__item a:hover {
+    font-size: 19px;
 }
 
 .article-container {
@@ -22,11 +43,15 @@
     margin-bottom: 50px;
 }
 
-.article-container__author {
+.article-inform {
+    margin-bottom: 20px;
+}
+
+.article-inform__author {
     font-weight: 600;
 }
 
-.article-container__time {
+.article-inform__time {
     color: #777;
 }
 
@@ -35,6 +60,7 @@
 }
 
 .article-container__title {
+    color: #0C1A22;
     font-weight: 800;
 }
 
@@ -42,8 +68,8 @@
     margin-top: 20px;
 }
 
-.article-container__btn {
-    display: inline-block;
+.article-container__button {
+    margin-top: 10px;
 }
 
 .article-statistic {
@@ -52,4 +78,11 @@
 
 .article-statistic__item {
     margin-right: 30px;
+}
+
+@media (max-width: 768px) {
+    .articles-funcs_button {
+        display: block;
+        margin: 20px auto auto;
+    }
 }

@@ -11,7 +11,7 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'create_time')
-    prepopulated_fields = {"slug": ("title",)}
+    exclude = ('views_count', 'comments_count')
 
 
 class TagAdmin(admin.ModelAdmin):

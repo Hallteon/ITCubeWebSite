@@ -27,7 +27,8 @@
     margin-top: 10px;
 }
 
-.form__btn {
+.form__button {
+    display: block;
     margin: 20px auto auto;
     width: 80%;
 }

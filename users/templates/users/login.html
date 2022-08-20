@@ -25,7 +25,6 @@
                     <div class="text-center form__errors">{{form.non_field_errors}}</div>
 
                     {% for item in form %}
-
                     <div class="row">
                         <div class="col-sm-4">
                             <label class="form__label" for="{{item.id_for_label}}">{{item.label}}: </label>
@@ -36,10 +35,9 @@
                     </div>
 
                     <div class="form__errors">{{item.errors}}</div>
-
                     {% endfor %}
 
-                    <button class="form__btn btn" type="submit">Войти</button>
+                    <button class="form__button button" type="submit">Войти</button>
                 </form>
             </div>
         </div>

@@ -44,17 +44,17 @@
                         <div class="col-sm-4">
                             <label class="form__label" for="{{form.tags.id_for_label}}">{{form.tags.label}}: </label>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-12 col-sm-8">
                             <div class="row">
                                 {% for tag in form.tags %}
-                                <div class="col-sm-6 col-md-4 col-xl-3">{{tag}}</div>
+                                <div class="col-6 col-md-4 col-xl-3">{{tag}}</div>
                                 {% endfor %}
                             </div>
                         </div>
                         <div class="form__errors">{{form.tags.errors}}</div>
                     </div>
 
-                    <button class="form__btn btn" type="submit">Опубликовать статью</button>
+                    <button class="form__button button" type="submit">Опубликовать статью</button>
                 </form>
             </div>
         </div>

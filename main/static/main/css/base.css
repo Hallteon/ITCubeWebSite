@@ -8,6 +8,7 @@ body {
 
 ul, li {
     display: block;
+    margin: 0;
     padding: 0;
 }
 
@@ -15,17 +16,20 @@ a {
     text-decoration: none;
 }
 
-.btn {
-    display: block;
+.button {
+    display: inline-block;
+    color: #0C1A22;
     font-weight: 500;
+    text-align: center;
     border: 5px solid #e3e6ea;
     border-radius: 20px;
     padding: 10px;
     transition: 0.5s;
 }
 
-.btn:hover {
+.button:hover {
     background-color: #f7c547;
+    color: #0C1A22;
 }
 
 /* Навбар */
@@ -64,13 +68,11 @@ a {
 }
 
 .profile__btn {
-    display: block;
     background-color: #fbbe3a;
     font-weight: 500;
     border: 3px solid #fbbe3a;
     border-radius: 20px;
     padding: 5px;
-    width: 60px;
     transition: 0.5s;
 }
 

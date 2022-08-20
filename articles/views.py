@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
 from articles.forms import AddArticleForm
-from articles.models import Article
+from articles.models import Article, Category
 from utils.utils import DataMixin
 
 
@@ -33,7 +33,6 @@ class ShowArticles(DataMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Статьи')
-        context['cat_selected'] = 0
 
         return dict(list(context.items()) + list(c_def.items()))
 
@@ -44,11 +43,29 @@ class ShowArticles(DataMixin, ListView):
 class ShowArticle(DataMixin, DetailView):
     model = Article
     template_name = 'articles/article.html'
-    slug_url_kwarg = 'article_slug'
+    pk_url_kwarg = 'article_id'
     context_object_name = 'article'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = context['article']
+        c_def = self.get_user_context(title=str(context['article']))
 
-        return context
+        return dict(list(context.items()) + list(c_def.items()))
+
+
+class ShowCategory(DataMixin, ListView):
+    model = Article
+    template_name = 'articles/articles.html'
+    context_object_name = 'articles'
+    allow_empty = False
+
+    def get_queryset(self):
+        return Article.objects.filter(tag__slug=self.kwargs['category_slug'], is_published=True).select_related('category')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c = Category.objects.get(slug=self.kwargs['category_slug'])
+        c_def = self.get_user_context(title=str(c.name), cat_selected=c.pk)
+
+        return dict(list(context.items()) + list(c_def.items()))
+
