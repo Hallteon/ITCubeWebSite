@@ -14,9 +14,15 @@
                     <div class="row justify-content-between articles-navbar">
                         <ul class="col-md-7 col-lg-10 col-xl-9 d-flex align-items-center justify-content-between categories">
                             {% for category in categories %}
-                            <li class="categories__item">
-                                <a href="{{category.get_absolute_url}}">{{category.name}}</a>
-                            </li>
+                                {% if category.pk == selected_cat %}
+                                <li class="categories__item">
+                                    <span>{{category.name}}</span>
+                                </li>
+                                {% else %}
+                                <li class="categories__item">
+                                    <a href="{{category.get_absolute_url}}">{{category.name}}</a>
+                                </li>
+                                {% endif %}
                             {% endfor %}
                         </ul>
 

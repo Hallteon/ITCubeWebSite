@@ -7,11 +7,9 @@ from articles.models import Category, Article
 class AddArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['tags'].empty_label = "Тэг не выбран"
 
     class Meta:
         model = Article
-        tags = forms.ModelMultipleChoiceField(queryset=Category.objects.all())
         fields = ['title', 'cover_image', 'content', 'tags']
         widgets = {'title': forms.TextInput(attrs={'class': 'form-control form-input form__input',
                                                    'placeholder': 'Введите название статьи'}),

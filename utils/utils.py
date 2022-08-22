@@ -11,7 +11,7 @@ class DataMixin:
         categories = Category.objects.all()
         context['categories'] = categories
 
-        if 'cat_selected' not in context:
-            context['cat_selected'] = 0
+        if 'selected_cat' not in context:
+            context['selected_cat'] = 0
 
         return context

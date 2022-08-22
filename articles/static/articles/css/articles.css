@@ -28,6 +28,12 @@
     font-size: 19px;
 }
 
+.categories__item span {
+    color: #0C1A22;
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .article-container {
     background-color: #fff;
     border-radius: 20px;

@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'main/css/404.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page_not_found">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="page_not_found__title">Ошибка 404 - страница не найдена <i class="bi bi-emoji-frown"></i></h2>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

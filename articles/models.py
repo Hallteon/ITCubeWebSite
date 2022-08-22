@@ -11,6 +11,7 @@ class Article(models.Model):
     content = RichTextUploadingField(verbose_name='Текст')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_time = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
+    category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.PROTECT, verbose_name='Категория')
     tags = models.ManyToManyField('Tag', verbose_name='Тэги')
     views_count = models.IntegerField(null=True, blank=True, default=0, verbose_name='Количество просмотров')
     comments_count = models.IntegerField(null=False, blank=True, default=0, verbose_name='Количество комментариев')

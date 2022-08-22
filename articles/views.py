@@ -37,7 +37,7 @@ class ShowArticles(DataMixin, ListView):
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
-        return Article.objects.filter(is_published=True)
+        return Article.objects.filter(is_published=True).order_by('-create_time')
 
 
 class ShowArticle(DataMixin, DetailView):
@@ -60,12 +60,12 @@ class ShowCategory(DataMixin, ListView):
     allow_empty = False
 
     def get_queryset(self):
-        return Article.objects.filter(tag__slug=self.kwargs['category_slug'], is_published=True).select_related('category')
+        return Article.objects.filter(category__slug=self.kwargs['category_slug'], is_published=True).order_by('-create_time').select_related('category')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c = Category.objects.get(slug=self.kwargs['category_slug'])
-        c_def = self.get_user_context(title=str(c.name), cat_selected=c.pk)
+        selected_cat = Category.objects.get(slug=self.kwargs['category_slug'])
+        c_def = self.get_user_context(title=str(selected_cat.name), selected_cat=selected_cat.pk)
 
         return dict(list(context.items()) + list(c_def.items()))
 
