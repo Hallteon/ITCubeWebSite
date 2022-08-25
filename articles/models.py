@@ -1,11 +1,11 @@
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.conf.global_settings import AUTH_USER_MODEL
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
 
 class Article(models.Model):
-    username = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.PROTECT, verbose_name='Автор')
+    author = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Автор')
     title = models.CharField(max_length=350, verbose_name='Заголовок')
     cover_image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, verbose_name='Обложка')
     content = RichTextUploadingField(verbose_name='Текст')
@@ -14,7 +14,6 @@ class Article(models.Model):
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.PROTECT, verbose_name='Категория')
     tags = models.ManyToManyField('Tag', verbose_name='Тэги')
     views_count = models.IntegerField(null=True, blank=True, default=0, verbose_name='Количество просмотров')
-    comments_count = models.IntegerField(null=False, blank=True, default=0, verbose_name='Количество комментариев')
     is_published = models.BooleanField(default=False, auto_created=True, verbose_name='Опубликовано')
 
     def __str__(self):
@@ -26,6 +25,20 @@ class Article(models.Model):
     class Meta:
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
+
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    article = models.ForeignKey('Article',on_delete=models.CASCADE, related_name='comment_article', verbose_name='Статья')
+    text = models.TextField(verbose_name='Текст')
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+
+    def __str__(self):
+        return self.author
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = ''
 
 
 class Tag(models.Model):

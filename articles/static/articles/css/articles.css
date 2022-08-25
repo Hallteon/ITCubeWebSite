@@ -45,15 +45,15 @@
     margin: 25px auto auto;
 }
 
-.article-inform {
+.article-info, .comment-info {
     margin-bottom: 20px;
 }
 
-.article-inform__author {
+.article-info__author, .comment-info__author {
     font-weight: 600;
 }
 
-.article-inform__time {
+.article-info__time, .comment-info__time {
     color: #777;
 }
 
@@ -80,6 +80,35 @@
 
 .article-statistic__item {
     margin-right: 30px;
+}
+
+.comments-container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 25px auto 0;
+}
+
+.comments-container__message {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.comment__text {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.comment-form {
+    margin-top: 14px;
+}
+
+.comment-form__label {
+    margin-bottom: 10px;
+}
+
+.comment-form__button {
+    margin-top: 20px;
 }
 
 .pagination {

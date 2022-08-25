@@ -1,13 +1,10 @@
 from django import forms
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
-from articles.models import Category, Article
+from articles.models import Category, Article, Comment
 
 
 class AddArticleForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
     class Meta:
         model = Article
         fields = ['title', 'cover_image', 'content', 'tags']
@@ -25,3 +22,10 @@ class ArticleAdminForm(forms.ModelForm):
     class Meta:
         model = Article
         fields = '__all__'
+
+
+class AddCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        widgets = {'text': forms.Textarea(attrs={'class': 'form-control form-input'})}

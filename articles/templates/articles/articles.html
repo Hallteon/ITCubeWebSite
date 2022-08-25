@@ -45,9 +45,9 @@
         <div class="row">
             {% for article in articles %}
             <div class="col-sm-10 article-container">
-                <ul class="d-flex justify-content-between article-inform">
-                    <li class="article-inform__author">{{article.username}}</li>
-                    <li class="article-inform__time">{{article.update_time|date:"d-m-Y H:i"}}</li>
+                <ul class="d-flex justify-content-between article-info">
+                    <li class="article-info__author">{{article.author}}</li>
+                    <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
                 </ul>
 
                 <a href="{{article.get_absolute_url}}">
@@ -66,7 +66,7 @@
 
                 <ul class="d-flex article-statistic">
                     <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
-                    <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments_count}}</li>
+                    <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comment_article.all.count}}</li>
                 </ul>
             </div>
             {% endfor %}

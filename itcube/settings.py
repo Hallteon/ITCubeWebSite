@@ -136,7 +136,7 @@ CKEDITOR_CONFIGS = {
         'toolbar': [
             ['Undo', 'Redo',
              '-', 'Bold', 'Italic', 'Underline',
-             '-', 'Link', 'Unlink', 'Anchor',
+             '-', 'Link', 'Unlink',
              '-', 'Format',
              '-', 'Maximize',
              '-', 'Table',
@@ -146,13 +146,11 @@ CKEDITOR_CONFIGS = {
             ],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
              '-', 'Font', 'FontSize', 'TextColor',
-             '-', 'Outdent', 'Indent',
              '-', 'HorizontalRule',
              '-', 'Blockquote',
              '-', 'CodeSnippet'
             ]
         ],
-        'codeSnippet_theme': 'monokai',
         'extraPlugins': ','.join(
                     [
                         'codesnippet',
@@ -160,7 +158,11 @@ CKEDITOR_CONFIGS = {
         'height': 300,
         'width': '100%',
         'toolbarCanCollapse': False,
-        'forcePasteAsPlainText': True
+        'forcePasteAsPlainText': True,
+        'font_defaultLabel': 'Inter',
+        'fontSize_defaultLabel': '16px',
+        'fontSize_sizes': '16px;18px;20px',
+        'codeSnippet_theme': 'foundation',
     }
 }
 CKEDITOR_UPLOAD_PATH = "uploads/"

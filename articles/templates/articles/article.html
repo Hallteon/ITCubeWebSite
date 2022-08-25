@@ -3,16 +3,17 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
 {% endblock %}
 
 {% block content %}
-<section class="article">
+<section class="articles articles_one-page">
     <div class="container">
         <div class="row">
             <div class="col-sm-10 article-container">
-                <ul class="d-flex justify-content-between">
-                    <li class="article-container__author">{{article.username}}</li>
-                    <li class="article-container__time">{{article.update_time|date:"d-m-Y H:i"}}</li>
+                <ul class="d-flex justify-content-between article-info">
+                    <li class="article-info__author">{{article.author}}</li>
+                    <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
                 </ul>
 
                 <h2 class="article-container__title">{{article.title}}</h2>
@@ -24,6 +25,39 @@
                 {% autoescape on %}
                 <p class="article-container__content">{{article.content|safe}}</p>
                 {% endautoescape %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-10 comments-container">
+                {% if article.comment_article.all %}
+                <div class="row">
+                    {% for comment in article.comment_article.all %}
+                    <div class="col-12 comment">
+                        <ul class="d-flex justify-content-between comment-info">
+                            <li class="comment-info__author">{{comment.author}}</li>
+                            <li class="comment-info__time">{{comment.create_time|date:"d-m-Y H:i"}}</li>
+                        </ul>
+                        <p class="comment__text">{{comment.text}}</p>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="comments-container__message">Оставтье комментарий первым!</p>
+                {% endif %}
+
+                <form class="comment-form" method="post">
+                    {% csrf_token %}
+
+                    <label class="form__label comment-form__label" for="{{item.id_for_label}}">Ваш комментарий</label>
+
+                    {{form.text}}
+
+                    <div class="form__errors">{{item.errors}}</div>
+
+
+                    <button class="button comment-form__button" type="submit">Оставить комментарий</button>
+                </form>
             </div>
         </div>
     </div>

@@ -1,8 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import F
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic.edit import FormMixin
 
-from articles.forms import AddArticleForm
+from articles.forms import AddArticleForm, AddCommentForm
 from articles.models import Article, Category
 from utils.utils import DataMixin
 
@@ -16,6 +18,15 @@ class AddArticle(LoginRequiredMixin, DataMixin, CreateView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Создание статьи')
         return dict(list(context.items()) + list(c_def.items()))
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+
+        if form.is_valid():
+            return self.form_valid(form)
+
+        else:
+            return self.form_invalid(form)
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -40,13 +51,35 @@ class ShowArticles(DataMixin, ListView):
         return Article.objects.filter(is_published=True).order_by('-create_time')
 
 
-class ShowArticle(DataMixin, DetailView):
+class ShowArticle(FormMixin, DataMixin, DetailView):
     model = Article
     template_name = 'articles/article.html'
     pk_url_kwarg = 'article_id'
     context_object_name = 'article'
+    form_class = AddCommentForm
+
+    def get_success_url(self):
+        return reverse_lazy('article', kwargs={'article_id': self.get_object().pk})
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+
+        if form.is_valid():
+            return self.form_valid(form)
+
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.author = self.request.user
+        self.object.article = self.get_object()
+        self.object.save()
+
+        return super().form_valid(form)
 
     def get_context_data(self, *, object_list=None, **kwargs):
+        Article.objects.filter(pk=self.get_object().pk).update(views_count=F('views_count')+1)
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=str(context['article']))
 
