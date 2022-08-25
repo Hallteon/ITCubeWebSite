@@ -1,3 +1,7 @@
+.articles_one-page {
+    margin-bottom: 25px;
+}
+
 .articles-header {
     background-color: #fff;
     padding-top: 15px;
@@ -41,14 +45,6 @@
     margin: 25px auto auto;
 }
 
-.article-container:first-child {
-    margin-top: 50px;
-}
-
-.article-container:last-child {
-    margin-bottom: 50px;
-}
-
 .article-inform {
     margin-bottom: 20px;
 }
@@ -86,8 +82,40 @@
     margin-right: 30px;
 }
 
+.pagination {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 25px auto 25px;
+}
+
+.pagination-button {
+    text-align: center;
+}
+
+.pages-list__item {
+    padding: 0 3px 0;
+}
+
+.pages-list__item span {
+    font-size: 19px;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.pages-list__item a, .pagination-button a {
+    color: #0C1A22;
+    font-size: 19px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.pages-list__item a:hover, .pagination-button a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 768px) {
-    .articles-funcs_button {
+    .articles-funcs__button {
         display: block;
         margin: 20px auto auto;
     }

@@ -24,6 +24,7 @@ a {
     border: 5px solid #e3e6ea;
     border-radius: 20px;
     padding: 10px;
+    cursor: pointer;
     transition: 0.5s;
 }
 

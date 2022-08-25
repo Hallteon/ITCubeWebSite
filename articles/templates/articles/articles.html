@@ -6,12 +6,16 @@
 {% endblock %}
 
 {% block content %}
+{% if page_obj.has_other_pages %}
 <section class="articles">
+{% else %}
+<section class="articles articles_one-page">
+{% endif %}
     <div class="container-fluid articles-header">
         <div class="row">
             <div class="col-12">
                 <div class="container">
-                    <div class="row justify-content-between articles-navbar">
+                    <nav class="row justify-content-between articles-navbar">
                         <ul class="col-md-7 col-lg-10 col-xl-9 d-flex align-items-center justify-content-between categories">
                             {% for category in categories %}
                                 {% if category.pk == selected_cat %}
@@ -28,10 +32,10 @@
 
                         <div class="col-md-4 col-lg-2 articles-funcs">
                             <a href="{% url 'add_article' %}">
-                                <div class="articles-funcs_button button">Написать статью <i class="bi bi-pencil"></i></div>
+                                <div class="articles-funcs__button button">Написать статью <i class="bi bi-pencil"></i></div>
                             </a>
                         </div>
-                    </div>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -67,6 +71,50 @@
             </div>
             {% endfor %}
         </div>
+
+        {% if page_obj.has_other_pages %}
+        <div class="row">
+            <div class="col-sm-10 pagination">
+                <div class="container-fluid">
+                    <div class="row justify-content-between">
+                        {% if page_obj.has_previous %}
+                        <div class="col-2 pagination-button">
+                            <a href="?page={{page_obj.previous_page_number}}">Назад</a>
+                        </div>
+                        {% else %}
+                        <div class="col-2"></div>
+                        {% endif %}
+
+                        <div class="col-8">
+                            <nav class="container-fluid pages-nav">
+                                <ul class="d-flex justify-content-center pages-list">
+                                    {% for page in paginator.page_range %}
+                                    {% if page_obj.number == page %}
+                                    <li class="pages-list__item">
+                                        <span>{{page}}</span>
+                                    </li>
+                                    {% elif page >= page_obj.number|add:-3 and page <= page_obj.number|add:3 %}
+                                    <li class="pages-list__item">
+                                        <a href="?page={{page}}">{{page}}</a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </nav>
+                        </div>
+
+                        {% if page_obj.has_next %}
+                        <div class="col-2 pagination-button">
+                            <a href="?page={{page_obj.next_page_number}}">Вперёд</a>
+                        </div>
+                        {% else %}
+                        <div class="col-2"></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
     </div>
 </section>
 {% endblock %}
