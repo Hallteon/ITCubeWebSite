@@ -57,6 +57,10 @@
     color: #777;
 }
 
+.article-info__author-name {
+    margin-left: 6px;
+}
+
 .article-container__image {
     width: 100%;
 }
@@ -92,6 +96,10 @@
 .comments-container__message {
     font-size: 20px;
     font-weight: 500;
+}
+
+.comments-container__require {
+    font-size: 18px;
 }
 
 .comment__text {

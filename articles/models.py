@@ -5,9 +5,9 @@ from django.urls import reverse
 
 
 class Article(models.Model):
-    author = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Автор')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
     title = models.CharField(max_length=350, verbose_name='Заголовок')
-    cover_image = models.ImageField(upload_to='images/%Y/%m/%d/', blank=True, verbose_name='Обложка')
+    cover_image = models.ImageField(upload_to='images/article_covers/%Y/%m/%d/', blank=True, verbose_name='Обложка')
     content = RichTextUploadingField(verbose_name='Текст')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     update_time = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
@@ -29,7 +29,7 @@ class Article(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
-    article = models.ForeignKey('Article',on_delete=models.CASCADE, related_name='comment_article', verbose_name='Статья')
+    article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comment', verbose_name='Статья')
     text = models.TextField(verbose_name='Текст')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
@@ -38,7 +38,7 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name = 'Комментарий'
-        verbose_name_plural = ''
+        verbose_name_plural = 'Комментарии'
 
 
 class Tag(models.Model):

@@ -46,7 +46,10 @@
             {% for article in articles %}
             <div class="col-sm-10 article-container">
                 <ul class="d-flex justify-content-between article-info">
-                    <li class="article-info__author">{{article.author}}</li>
+                    <li class="article-info__author">
+                        <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                        <span class="article-info__author-name">{{article.author}}</span>
+                    </li>
                     <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
                 </ul>
 
@@ -66,7 +69,7 @@
 
                 <ul class="d-flex article-statistic">
                     <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
-                    <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comment_article.all.count}}</li>
+                    <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comment.all.count}}</li>
                 </ul>
             </div>
             {% endfor %}
