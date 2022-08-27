@@ -5,7 +5,7 @@ from django.urls import reverse
 
 
 class Article(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name='Автор')
     title = models.CharField(max_length=350, verbose_name='Заголовок')
     cover_image = models.ImageField(upload_to='images/article_covers/%Y/%m/%d/', blank=True, verbose_name='Обложка')
     content = RichTextUploadingField(verbose_name='Текст')
@@ -29,12 +29,12 @@ class Article(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор')
-    article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comment', verbose_name='Статья')
+    article = models.ForeignKey('Article', on_delete=models.CASCADE, related_name='comments', verbose_name='Статья')
     text = models.TextField(verbose_name='Текст')
     create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
     def __str__(self):
-        return self.author
+        return self.author.username
 
     class Meta:
         verbose_name = 'Комментарий'

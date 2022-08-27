@@ -7,14 +7,14 @@
 {% endblock %}
 
 {% block content %}
-<section class="articles articles_one-page">
+<section class="articles articles_one-page content">
     <div class="container">
         <div class="row">
             <div class="col-sm-10 article-container">
                 <ul class="d-flex justify-content-between article-info">
                     <li class="article-info__author">
                         <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
-                        <span class="article-info__author-name">{{article.author}}</span>
+                        <a href="{{article.author.userprofile.get_absolute_url}}">{{article.author}}</a>
                     </li>
                     <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
                 </ul>
@@ -32,9 +32,10 @@
         </div>
         <div class="row">
             <div class="col-sm-10 comments-container">
-                {% if article.comment.all %}
+                <p class="comments-container__title">Комментарии:</p>
+                {% if article.comments.all %}
                 <div class="row">
-                    {% for comment in article.comment.all %}
+                    {% for comment in article.comments.all %}
                     <div class="col-12 comment">
                         <ul class="d-flex justify-content-between comment-info">
                             <li class="comment-info__author">{{comment.author}}</li>

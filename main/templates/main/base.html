@@ -53,7 +53,9 @@
 
                                 <li class="nav-item menu__item">
                                     <div class="dropdown profile">
-                                        <button class="dropdown-toggle profile__btn" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle menu__link_icon"></i></button>
+                                        <button class="dropdown-toggle profile__btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img class="user-avatar" src="{{request.user.userprofile.profile_picture.url}}" alt="Аватарка">
+                                        </button>
 
                                         <ul class="dropdown-menu">
                                             <li><a class="dropdown-item profile__link" href="{{request.user.userprofile.get_absolute_url}}">Профиль <i class="bi bi-person-square"></i></a></li>

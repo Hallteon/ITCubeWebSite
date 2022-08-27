@@ -6,9 +6,41 @@
 {% endblock %}
 
 {% block content %}
-<section class="profile">
+<section class="profile content">
     <div class="container">
+        <div class="row">
+            <div class="col-sm-10 profile-info">
+                <ul class="d-flex align-items-center profile-info-list d-flex">
+                    <li class="d-flex align-items-center profile-info-list__item">
+                        <img class="profile-info__picture" src="{{profile.profile_picture.url}}" alt="Аватарка">
+                        <div class="d-flex flex-column profile-info-user">
+                            <p class="profile-info-user__name">{{profile.user.username}}</p>
+                            <p class="profile-info-user__status">Пользователь</p>
+                        </div>
+                    </li>
+                </ul>
 
+                <p class="profile-info__xp">Количество опыта у пользователя: <strong>{{profile.xp}}XP</strong></p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-10 user-articles">
+                <p class="user-articles__title">Статьи пользователя <strong>{{profile.user.username}}</strong>:</p>
+                <div class="row">
+                {% for article in profile.user.articles.all %}
+                    <div class="col-12 user-article">
+                        <a class="user-article__title" href="{{article.get_absolute_url}}">{{article.title}}</a>
+
+                        <ul class="d-flex user-article-info">
+                            <li class="user-article-info__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
+                            <li class="user-article-info__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
+                        </ul>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

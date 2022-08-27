@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from articles.forms import ArticleAdminForm
-from articles.models import Category, Article, Tag
+from articles.forms import ArticleAdminForm, AddCommentForm
+from articles.models import Category, Article, Tag, Comment
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -11,7 +11,15 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'create_time')
-    exclude = ('views_count', 'comments_count')
+    exclude = ('views_count',)
+
+
+class CommentAdmin(admin.ModelAdmin):
+    form = AddCommentForm
+    list_display = ('author', 'article', 'text', 'create_time')
+    list_display_links = ('author', 'article')
+    search_fields = ('author', 'article')
+    list_filter = ('author',)
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -29,5 +37,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Article, ArticleAdmin)
+admin.site.register(Comment, CommentAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Category, CategoryAdmin)
