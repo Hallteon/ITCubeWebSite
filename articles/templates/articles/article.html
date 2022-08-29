@@ -38,7 +38,10 @@
                     {% for comment in article.comments.all %}
                     <div class="col-12 comment">
                         <ul class="d-flex justify-content-between comment-info">
-                            <li class="comment-info__author">{{comment.author}}</li>
+                            <li class="comment-info__author">
+                                <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                                <a href="{{article.author.userprofile.get_absolute_url}}">{{article.author}}</a>
+                            </li>
                             <li class="comment-info__time">{{comment.create_time|date:"d-m-Y H:i"}}</li>
                         </ul>
                         <p class="comment__text">{{comment.text}}</p>

@@ -83,7 +83,6 @@ profile_default/
 ipython_config.py
 
 # SQLite
-.sqlite3
 
 # pyenv
 .python-version

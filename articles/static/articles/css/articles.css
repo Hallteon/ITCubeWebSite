@@ -109,6 +109,11 @@
     font-size: 18px;
 }
 
+.comment-info__author a {
+    color: #0C1A22;
+    margin-left: 4px;
+}
+
 .comment__text {
     font-size: 15px;
     font-weight: 500;
