@@ -1,0 +1,47 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'users/css/user_settings.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="content user-settings">
+    <div class="container">
+        <div class="row justify-content-evenly">
+            <aside class="col-3 sidebar">
+                <ul class="sidebar-list">
+                    <li class="sidebar-list__item">
+                        <a href="{% url 'user_settings' %}">Настройки пользователя</a>
+                    </li>
+                    <li class="sidebar-list__item">
+                        <a href="{% url 'profile_settings' %}">Настройки профиля</a>
+                    </li>
+                </ul>
+            </aside>
+
+            <div class="col-8 settings">
+                <form class="form settings-form" method="post">
+                    {% csrf_token %}
+
+                    {% for item in form %}
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label class="form__label" for="{{item.id_for_label}}">{{item.label}}: </label>
+                        </div>
+                        <div class="col-sm-9">
+                            {{item}}
+                        </div>
+                    </div>
+
+                    <div class="form__errors">{{item.errors}}</div>
+                    {% endfor %}
+
+                    <button class="button settings-form__button" type="submit">Применить настройки</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

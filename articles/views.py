@@ -6,19 +6,7 @@ from django.views.generic.edit import FormMixin
 
 from articles.forms import AddArticleForm, AddCommentForm
 from articles.models import Article, Category
-from users.models import Ip
 from utils.utils import DataMixin
-
-
-def get_client_ip(request):
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-
-    return ip
 
 
 class AddArticle(LoginRequiredMixin, DataMixin, CreateView):
@@ -83,21 +71,16 @@ class ShowArticle(FormMixin, DataMixin, DetailView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.author = self.request.user
-        self.object.article = self.get_object()
-        self.object.save()
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        obj.article = self.get_object()
+        obj.save()
 
         return super().form_valid(form)
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        ip = get_client_ip(self.request)
-
-        if Ip.objects.filter(ip=ip).exists():
-            self.get_object().views_count.add(Ip.objects.get(ip=ip))
-        else:
-            Ip.objects.create(user=self.request.user, ip=ip)
-            self.get_object().views_count.add(Ip.objects.get(ip=ip))
+        if self.request.user not in self.get_object().views_count.all():
+            self.get_object().views_count.add(self.request.user)
 
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=str(context['article']))
@@ -109,7 +92,7 @@ class ShowCategory(DataMixin, ListView):
     model = Article
     template_name = 'articles/articles.html'
     context_object_name = 'articles'
-    allow_empty = False
+    allow_empty = True
 
     def get_queryset(self):
         return Article.objects.filter(category__slug=self.kwargs['category_slug'], is_published=True).order_by('-create_time').select_related('category')

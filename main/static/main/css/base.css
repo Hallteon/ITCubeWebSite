@@ -47,6 +47,12 @@ a.button {
     color: #0C1A22;
 }
 
+.sidebar {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
 /* Навбар */
 
 .header {

@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
-from users.models import Ip
-
 
 class Article(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='articles', verbose_name='Автор')
@@ -15,7 +13,7 @@ class Article(models.Model):
     update_time = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.PROTECT, verbose_name='Категория')
     tags = models.ManyToManyField('Tag', verbose_name='Тэги')
-    views_count = models.ManyToManyField(Ip, blank=True, related_name='views', verbose_name='Количество просмотров')
+    views_count = models.ManyToManyField(User, blank=True, related_name='views', verbose_name='Количество просмотров')
     is_published = models.BooleanField(default=False, auto_created=True, verbose_name='Опубликовано')
 
     def __str__(self):

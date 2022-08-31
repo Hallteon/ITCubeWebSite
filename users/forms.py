@@ -3,6 +3,24 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from captcha import fields
 
+from users.models import UserProfile
+
+
+class UserSettingsForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('username', 'password')
+        widgets = {'username': forms.TextInput(attrs={'class': 'form-control form-input form__input'}),
+                   'password': forms.TextInput(attrs={'class': 'form-control form-input form__input'})}
+
+
+class ProfileSettingsForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('name', 'profile_picture',)
+        widgets = {'name': forms.TextInput(attrs={'class': 'form-control form-input form__input'}),
+                   'profile_picture': forms.FileInput(attrs={'class': 'form-control form-input form__input'})}
+
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label="Имя пользователя", widget=forms.TextInput(attrs={'class': 'form-control form-input form__input',

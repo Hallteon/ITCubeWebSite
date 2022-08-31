@@ -1,4 +1,4 @@
-from articles.models import Category, Article
+from articles.models import Category
 
 title = ' | IT-Hogwarts'
 
