@@ -6,7 +6,19 @@ from django.views.generic.edit import FormMixin
 
 from articles.forms import AddArticleForm, AddCommentForm
 from articles.models import Article, Category
+from users.models import Ip
 from utils.utils import DataMixin
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
+    return ip
 
 
 class AddArticle(LoginRequiredMixin, DataMixin, CreateView):
@@ -79,7 +91,14 @@ class ShowArticle(FormMixin, DataMixin, DetailView):
         return super().form_valid(form)
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        Article.objects.filter(pk=self.get_object().pk).update(views_count=F('views_count')+1)
+        ip = get_client_ip(self.request)
+
+        if Ip.objects.filter(ip=ip).exists():
+            self.get_object().views_count.add(Ip.objects.get(ip=ip))
+        else:
+            Ip.objects.create(user=self.request.user, ip=ip)
+            self.get_object().views_count.add(Ip.objects.get(ip=ip))
+
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=str(context['article']))
 

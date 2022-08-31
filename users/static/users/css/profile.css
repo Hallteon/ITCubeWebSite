@@ -1,7 +1,11 @@
+.profile {
+    margin: 20px 0;
+}
+
 .profile-info {
     background-color: #fff;
     border-radius: 20px;
-    margin: 20px auto 0;
+    margin: 0 auto 0;
     padding: 20px;
 }
 
@@ -29,39 +33,21 @@
     margin-bottom: 0;
 }
 
-.user-articles {
+.user-categories-nav {
     background-color: #fff;
     border-radius: 20px;
-    margin: 20px auto 20px;
+    margin: 25px auto 0;
     padding: 20px;
 }
 
-.user-articles__title {
+.user-categories-list__item {
+    font-size: 18px;
+    font-weight: 500;
+    padding-right: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.user-categories-list__item:hover {
     font-size: 19px;
-    font-weight: 500;
-}
-
-.user-article:first-child {
-    margin-top: 0;
-}
-
-.user-article {
-    border: 0.5px solid darkgray;
-    border-radius: 20px;
-    margin-top: 20px;
-    padding: 6px 15px;
-
-}
-
-.user-article a {
-    color: #0C1A22;
-    font-weight: 500;
-}
-
-.user-article-info {
-    margin-top: 10px;
-}
-
-.user-article-info__item {
-    margin-right: 30px;
 }

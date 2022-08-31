@@ -3,6 +3,10 @@ from django.contrib import admin
 from users.models import UserProfile
 
 
+class IpAdmin(admin.ModelAdmin):
+    list_display = ('ip')
+
+
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'profile_picture', 'xp', 'slug')
     list_display_links = ('id', 'user')

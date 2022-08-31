@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'users/css/profile.css' %}">
+<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -24,22 +25,45 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-10 user-articles">
-                <p class="user-articles__title">Статьи пользователя <strong>{{profile.user.username}}</strong>:</p>
-                <div class="row">
-                {% for article in profile.user.articles.all %}
-                    <div class="col-12 user-article">
-                        <a class="user-article__title" href="{{article.get_absolute_url}}">{{article.title}}</a>
-
-                        <ul class="d-flex user-article-info">
-                            <li class="user-article-info__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
-                            <li class="user-article-info__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
-                        </ul>
-                    </div>
-                {% endfor %}
-                </div>
+        <div class="row user-categories">
+            <div class="col-sm-10 user-categories-nav">
+                <nav>
+                    <ul class="d-flex user-categories-list">
+                        <li class="user-categories-list__item">Статьи</li>
+                    </ul>
+                </nav>
             </div>
+
+        {% for article in profile.user.articles.all %}
+            <div class="col-sm-10 article-container">
+                <ul class="d-flex justify-content-between article-info">
+                    <li class="article-info__author">
+                        <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                        <a href="{{article.author.userprofile.get_absolute_url}}">{{article.author}}</a>
+                    </li>
+                    <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
+                </ul>
+
+                <a href="{{article.get_absolute_url}}">
+                    <h2 class="article-container__title">{{article.title}}</h2>
+                </a>
+
+                {% if article.cover_image %}
+                <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
+                {% endif %}
+
+                {% autoescape on %}
+                <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
+                {% endautoescape %}
+
+                <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>
+
+                <ul class="d-flex article-statistic">
+                    <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
+                    <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
+                </ul>
+            </div>
+        {% endfor %}
         </div>
     </div>
 </section>

@@ -112,7 +112,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ru-ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Yekaterinburg'
 
 USE_I18N = True
 
@@ -145,7 +145,7 @@ CKEDITOR_CONFIGS = {
              '-', 'NumberedList', 'BulletedList'
             ],
             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
-             '-', 'Font', 'FontSize', 'TextColor',
+             '-', 'TextColor',
              '-', 'HorizontalRule',
              '-', 'Blockquote',
              '-', 'CodeSnippet'
@@ -161,7 +161,6 @@ CKEDITOR_CONFIGS = {
         'forcePasteAsPlainText': True,
         'font_defaultLabel': 'Inter',
         'fontSize_defaultLabel': '16px',
-        'fontSize_sizes': '16px;18px;20px',
         'codeSnippet_theme': 'foundation',
     }
 }

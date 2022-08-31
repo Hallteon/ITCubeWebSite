@@ -31,26 +31,35 @@ a {
     border-radius: 20px;
     padding: 10px;
     cursor: pointer;
-    transition: 0.5s;
+    background-image: -webkit-linear-gradient(45deg, #f1c40f 50%, transparent 50%);
+    background-image: linear-gradient(45deg, #f1c40f 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
 }
 
 .button:hover {
-    background-color: #f7c547;
+    background-position: 0;
+}
+
+a.button {
     color: #0C1A22;
 }
 
 /* Навбар */
 
 .header {
+    background-color: #fbbe3a;
     position: sticky;
     top: 0;
-    background-color: #fbbe3a;
     z-index: 10;
 }
 
 .menu__title {
     color: #0C1A22;
     font-weight: 800;
+    margin: 0;
 }
 
 .menu__btn {
@@ -75,7 +84,7 @@ a {
     color: white !important;
 }
 
-.profile__btn {
+.user-profile__btn {
     background-color: #fbbe3a;
     font-weight: 500;
     border: none;
@@ -84,11 +93,11 @@ a {
     transition: 0.5s;
 }
 
-.profile__btn:hover, .profile__btn:focus {
+.user-profile__btn:hover, .profile__btn:focus {
     border-color: #e3e6ea;
 }
 
-.profile__link {
+.user-profile__link {
     font-weight: 500;
 }
 

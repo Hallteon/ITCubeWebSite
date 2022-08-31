@@ -52,15 +52,15 @@
                                 {% if request.user.is_authenticated %}
 
                                 <li class="nav-item menu__item">
-                                    <div class="dropdown profile">
-                                        <button class="dropdown-toggle profile__btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="dropdown user-profile">
+                                        <button class="dropdown-toggle user-profile__btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <img class="user-avatar" src="{{request.user.userprofile.profile_picture.url}}" alt="Аватарка">
                                         </button>
 
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item profile__link" href="{{request.user.userprofile.get_absolute_url}}">Профиль <i class="bi bi-person-square"></i></a></li>
-                                            <li><a class="dropdown-item profile__link" href="{% url 'settings' %}">Настройки <i class="bi bi-gear"></i></a></li>
-                                            <li><a class="dropdown-item profile__link" href="{% url 'logout' %}">Выйти <i class="bi bi-arrow-left-square"></i></a></li>
+                                            <li><a class="dropdown-item user-profile__link" href="{{request.user.userprofile.get_absolute_url}}">Профиль <i class="bi bi-person-square"></i></a></li>
+                                            <li><a class="dropdown-item user-profile__link" href="{% url 'settings' %}">Настройки <i class="bi bi-gear"></i></a></li>
+                                            <li><a class="dropdown-item user-profile__link" href="{% url 'logout' %}">Выйти <i class="bi bi-arrow-left-square"></i></a></li>
                                         </ul>
                                     </div>
                                 </li>

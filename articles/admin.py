@@ -11,7 +11,6 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('title', 'content')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'create_time')
-    exclude = ('views_count',)
 
 
 class CommentAdmin(admin.ModelAdmin):

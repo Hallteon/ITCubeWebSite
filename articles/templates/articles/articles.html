@@ -68,7 +68,7 @@
                 <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>
 
                 <ul class="d-flex article-statistic">
-                    <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count}}</li>
+                    <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count.all.count}}</li>
                     <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
                 </ul>
             </div>
