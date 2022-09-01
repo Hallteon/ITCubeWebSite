@@ -21,6 +21,18 @@
 
                 <h2 class="article-container__title">{{article.title}}</h2>
 
+                <ul class="d-flex article-tags">
+                    {% for tag in article.tags.all %}
+                    <li class="article-tags__item">
+                        {% if tag == article.tags.all.last %}
+                        <span>{{tag.name}}</span>
+                        {% else %}
+                        <span>{{tag.name}},</span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+
                 {% if article.cover_image %}
                 <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
                 {% endif %}

@@ -72,6 +72,16 @@
     font-weight: 800;
 }
 
+.article-tags {
+    margin-bottom: 10px;
+}
+
+.article-tags__item {
+    color: #5e6973;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
 .article-container__content {
     margin-top: 20px;
 }
