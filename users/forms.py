@@ -9,9 +9,8 @@ from users.models import UserProfile
 class UserSettingsForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ('username', 'password')
-        widgets = {'username': forms.TextInput(attrs={'class': 'form-control form-input form__input'}),
-                   'password': forms.TextInput(attrs={'class': 'form-control form-input form__input'})}
+        fields = ('username',)
+        widgets = {'username': forms.TextInput(attrs={'class': 'form-control form-input form__input'})}
 
 
 class ProfileSettingsForm(forms.ModelForm):

@@ -22,7 +22,7 @@
             </aside>
 
             <div class="col-8 settings">
-                <form class="form settings-form" method="post">
+                <form class="form settings-form" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     {% for item in form %}
