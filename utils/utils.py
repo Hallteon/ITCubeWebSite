@@ -1,4 +1,4 @@
-from articles.models import Category
+from articles.models import Category, Tag
 
 title = ' | IT-Hogwarts'
 
@@ -10,10 +10,14 @@ class DataMixin:
         context = kwargs
 
         context['title'] = context['title'] + title
+
         categories = Category.objects.all()
         context['categories'] = categories
 
         if 'selected_cat' not in context:
             context['selected_cat'] = 0
+
+        if 'selected_tag' not in context:
+            context['selected_tag'] = 0
 
         return context

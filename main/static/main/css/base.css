@@ -53,6 +53,19 @@ a.button {
     padding: 20px;
 }
 
+.sidebar-list__item, .sidebar-list__item a {
+    color: #0C1A22;
+    font-weight: 500;
+}
+
+.sidebar-list__item {
+    padding-bottom: 5px;
+}
+
+.sidebar-list__item:last-child {
+    padding-bottom: 0;
+}
+
 /* Навбар */
 
 .header {

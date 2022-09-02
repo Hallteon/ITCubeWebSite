@@ -25,9 +25,9 @@
                     {% for tag in article.tags.all %}
                     <li class="article-tags__item">
                         {% if tag == article.tags.all.last %}
-                        <span>{{tag.name}}</span>
+                        <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
                         {% else %}
-                        <span>{{tag.name}},</span>
+                        <a href="{{tag.get_absolute_url}}">{{tag.name}},</a>
                         {% endif %}
                     </li>
                     {% endfor %}

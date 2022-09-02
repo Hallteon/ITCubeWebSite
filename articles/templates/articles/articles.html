@@ -42,93 +42,117 @@
     </div>
 
     <div class="container">
-        <div class="row">
-            {% for article in articles %}
-            <div class="col-sm-10 article-container">
-                <ul class="d-flex justify-content-between article-info">
-                    <li class="article-info__author">
-                        <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
-                        <a href="{{article.author.userprofile.get_absolute_url}}">{{article.author}}</a>
-                    </li>
-                    <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
-                </ul>
+        <div class="row justify-content-between">
+            <div class="col-10">
+                {% for article in articles %}
+                <div class="col-12 article-container">
+                    <ul class="d-flex justify-content-between article-info">
+                        <li class="article-info__author">
+                            <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                            <a href="{{article.author.userprofile.get_absolute_url}}">{{article.author}}</a>
+                        </li>
+                        <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
+                    </ul>
 
-                <a href="{{article.get_absolute_url}}">
-                    <h2 class="article-container__title">{{article.title}}</h2>
-                </a>
+                    <a href="{{article.get_absolute_url}}">
+                        <h2 class="article-container__title">{{article.title}}</h2>
+                    </a>
 
-                <ul class="d-flex article-tags">
-                    {% for tag in article.tags.all %}
-                    <li class="article-tags__item">
-                        {% if tag == article.tags.all.last %}
-                        <span>{{tag.name}}</span>
-                        {% else %}
-                        <span>{{tag.name}},</span>
-                        {% endif %}
-                    </li>
-                    {% endfor %}
-                </ul>
+                    <ul class="d-flex article-tags">
+                        {% for tag in article.tags.all %}
+                        <li class="article-tags__item">
+                            {% if tag == article.tags.all.last %}
+                            <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
+                            {% else %}
+                            <a href="{{tag.get_absolute_url}}">{{tag.name}},</a>
+                            {% endif %}
+                        </li>
+                        {% endfor %}
+                    </ul>
 
-                {% if article.cover_image %}
-                <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
-                {% endif %}
+                    {% if article.cover_image %}
+                    <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
+                    {% endif %}
 
-                {% autoescape on %}
-                <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
-                {% endautoescape %}
+                    {% autoescape on %}
+                    <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
+                    {% endautoescape %}
 
-                <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>
+                    <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>
 
-                <ul class="d-flex article-statistic">
-                    <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count.all.count}}</li>
-                    <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
-                </ul>
+                    <ul class="d-flex article-statistic">
+                        <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count.all.count}}</li>
+                        <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
+                    </ul>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
+            <div class="col-2">
+                <aside class="tags-sidebar sidebar">
+                    <p class=""><strong>Теги:</strong></p>
+
+                    <ul class="sidebar-list">
+                        {% for tag in tags %}
+                        {% if tag.pk == selected_tag %}
+                        <li class="sidebar-list__item">
+                            <span class="selected-tag">{{tag.name}}</span>
+                        </li>
+                        {% else %}
+                        <li class="sidebar-list__item">
+                            <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </aside>
+            </div>
         </div>
 
         {% if page_obj.has_other_pages %}
         <div class="row">
-            <div class="col-sm-10 pagination">
-                <div class="container-fluid">
-                    <div class="row justify-content-between">
-                        {% if page_obj.has_previous %}
-                        <div class="col-2 pagination-button">
-                            <a href="?page={{page_obj.previous_page_number}}">Назад</a>
-                        </div>
-                        {% else %}
-                        <div class="col-2"></div>
-                        {% endif %}
+            <div class="col-sm-10">
+                <div class="col-12 pagination">
+                    <div class="container-fluid">
+                        <div class="row justify-content-between">
+                            {% if page_obj.has_previous %}
+                            <div class="col-2 pagination-button">
+                                <a href="?page={{page_obj.previous_page_number}}">Назад</a>
+                            </div>
+                            {% else %}
+                            <div class="col-2"></div>
+                            {% endif %}
 
-                        <div class="col-8">
-                            <nav class="container-fluid pages-nav">
-                                <ul class="d-flex justify-content-center pages-list">
-                                    {% for page in paginator.page_range %}
-                                    {% if page_obj.number == page %}
-                                    <li class="pages-list__item">
-                                        <span>{{page}}</span>
-                                    </li>
-                                    {% elif page >= page_obj.number|add:-3 and page <= page_obj.number|add:3 %}
-                                    <li class="pages-list__item">
-                                        <a href="?page={{page}}">{{page}}</a>
-                                    </li>
-                                    {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </nav>
-                        </div>
+                            <div class="col-8">
+                                <nav class="container-fluid pages-nav">
+                                    <ul class="d-flex justify-content-center pages-list">
+                                        {% for page in paginator.page_range %}
+                                        {% if page_obj.number == page %}
+                                        <li class="pages-list__item">
+                                            <span>{{page}}</span>
+                                        </li>
+                                        {% elif page >= page_obj.number|add:-3 and page <= page_obj.number|add:3 %}
+                                        <li class="pages-list__item">
+                                            <a href="?page={{page}}">{{page}}</a>
+                                        </li>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </nav>
+                            </div>
 
-                        {% if page_obj.has_next %}
-                        <div class="col-2 pagination-button">
-                            <a href="?page={{page_obj.next_page_number}}">Вперёд</a>
+                            {% if page_obj.has_next %}
+                            <div class="col-2 pagination-button">
+                                <a href="?page={{page_obj.next_page_number}}">Вперёд</a>
+                            </div>
+                            {% else %}
+                            <div class="col-2"></div>
+                            {% endif %}
                         </div>
-                        {% else %}
-                        <div class="col-2"></div>
-                        {% endif %}
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
         {% endif %}
     </div>
 </section>

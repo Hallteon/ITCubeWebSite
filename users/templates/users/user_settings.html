@@ -10,16 +10,18 @@
 <section class="content user-settings">
     <div class="container">
         <div class="row justify-content-evenly">
-            <aside class="col-3 sidebar">
-                <ul class="sidebar-list">
-                    <li class="sidebar-list__item">
-                        <a href="{% url 'user_settings' %}">Настройки пользователя</a>
-                    </li>
-                    <li class="sidebar-list__item">
-                        <a href="{% url 'profile_settings' %}">Настройки профиля</a>
-                    </li>
-                </ul>
-            </aside>
+            <div class="col-3">
+                <aside class="sidebar">
+                    <ul class="sidebar-list">
+                        <li class="sidebar-list__item">
+                            <a href="{% url 'user_settings' %}">Настройки пользователя</a>
+                        </li>
+                        <li class="sidebar-list__item">
+                            <a href="{% url 'profile_settings' %}">Настройки профиля</a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
 
             <div class="col-8 settings">
                 <form class="form settings-form" method="post" enctype="multipart/form-data">

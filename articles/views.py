@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin
 
 from articles.forms import AddArticleForm, AddCommentForm
-from articles.models import Article, Category
+from articles.models import Article, Category, Tag
 from utils.utils import DataMixin
 
 
@@ -41,14 +41,16 @@ class ShowArticles(DataMixin, ListView):
     template_name = 'articles/articles.html'
     context_object_name = 'articles'
 
+    def get_queryset(self):
+        return Article.objects.filter(is_published=True).order_by('-create_time')
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+
         c_def = self.get_user_context(title='Статьи')
 
         return dict(list(context.items()) + list(c_def.items()))
-
-    def get_queryset(self):
-        return Article.objects.filter(is_published=True).order_by('-create_time')
 
 
 class ShowArticle(FormMixin, DataMixin, DetailView):
@@ -99,8 +101,28 @@ class ShowCategory(DataMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['tags'] = Tag.objects.filter(category__slug=self.kwargs['category_slug'])
+
         selected_cat = Category.objects.get(slug=self.kwargs['category_slug'])
         c_def = self.get_user_context(title=str(selected_cat.name), selected_cat=selected_cat.pk)
 
         return dict(list(context.items()) + list(c_def.items()))
 
+
+class ShowTag(DataMixin, ListView):
+    model = Article
+    template_name = 'articles/articles.html'
+    context_object_name = 'articles'
+    allow_empty = True
+
+    def get_queryset(self):
+        return Article.objects.filter(tags__slug=self.kwargs['tag_slug'], is_published=True).order_by('-create_time')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tags'] = Tag.objects.all()
+
+        selected_tag = Tag.objects.get(slug=self.kwargs['tag_slug'])
+        c_def = self.get_user_context(title=str(selected_tag.name), selected_tag=selected_tag.pk)
+
+        return dict(list(context.items()) + list(c_def.items()))
