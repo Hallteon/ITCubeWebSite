@@ -49,11 +49,31 @@
     text-decoration: underline;
 }
 
+.section-description {
+    background-color: #fff;
+    border-radius: 20px;
+    margin-top: 25px;
+    padding: 20px;
+}
+
+.section-description p {
+    margin-bottom: 0;
+}
+
+.section-description__name {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.section-description__description {
+    font-weight: 500;
+}
+
 .article-container {
     background-color: #fff;
     border-radius: 20px;
     padding: 20px;
-    margin-top: 25px;
+    margin: 25px auto 0;
 }
 
 .article-info, .comment-info {
@@ -114,7 +134,7 @@
 
 .comments-container {
     background-color: #fff;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 20px;
     margin: 25px auto 0;
 }

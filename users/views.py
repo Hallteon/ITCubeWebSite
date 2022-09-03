@@ -49,12 +49,6 @@ class ProfileSettings(LoginRequiredMixin, DataMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'profile_slug': self.request.user.userprofile.slug})
 
-    def form_valid(self, form):
-        obj = form.save(commit=False)
-        obj.save()
-
-        return super().form_valid(form)
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Настройки профиля')

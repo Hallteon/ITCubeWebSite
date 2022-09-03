@@ -102,6 +102,7 @@ class ShowCategory(DataMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tags'] = Tag.objects.filter(category__slug=self.kwargs['category_slug'])
+        context['category'] = Category.objects.get(slug=self.kwargs['category_slug'])
 
         selected_cat = Category.objects.get(slug=self.kwargs['category_slug'])
         c_def = self.get_user_context(title=str(selected_cat.name), selected_cat=selected_cat.pk)
@@ -121,6 +122,7 @@ class ShowTag(DataMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tags'] = Tag.objects.all()
+        context['tag'] = Tag.objects.get(slug=self.kwargs['tag_slug'])
 
         selected_tag = Tag.objects.get(slug=self.kwargs['tag_slug'])
         c_def = self.get_user_context(title=str(selected_tag.name), selected_tag=selected_tag.pk)
