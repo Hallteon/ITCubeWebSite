@@ -1,11 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import F
+from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, DeleteView
 
 from articles.forms import AddArticleForm, AddCommentForm
-from articles.models import Article, Category, Tag
+from articles.models import Article, Category, Tag, Comment
 from utils.utils import DataMixin
 
 
@@ -34,6 +35,23 @@ class AddArticle(LoginRequiredMixin, DataMixin, CreateView):
         obj.save()
 
         return super().form_valid(form)
+
+
+class DeleteComment(DeleteView):
+    model = Comment
+    pk_url_kwarg = 'comment_id'
+
+    def delete(self, request, *args, **kwargs):
+        self.obj = self.get_object()
+
+        if self.obj.author.pk == self.request.user.pk or self.request.user.is_superuser():
+            self.success_url = self.get_success_url()
+            self.obj.delete()
+
+            return HttpResponseRedirect(self.success_url)
+
+    def get_success_url(self):
+        return reverse_lazy('article', kwargs={'article_id': self.get_object().article.pk})
 
 
 class ShowArticles(DataMixin, ListView):

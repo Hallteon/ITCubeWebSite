@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
+<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}" xmlns="http://www.w3.org/1999/html">
 <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
 {% endblock %}
 
@@ -45,18 +45,25 @@
         <div class="row">
             <div class="col-sm-10 comments-container">
                 <p class="comments-container__title">Комментарии:</p>
-                {% if article.comments.all %}
+                {% if article.comments.all.count %}
                 <div class="row">
                     {% for comment in article.comments.all %}
                     <div class="col-12 comment">
                         <ul class="d-flex justify-content-between comment-info">
                             <li class="comment-info__author">
-                                <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
-                                <a href="{{article.author.userprofile.get_absolute_url}}">{{article.author}}</a>
+                                <img class="article-info__author-avatar user-avatar" src="{{comment.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                                <a href="{{comment.author.userprofile.get_absolute_url}}">{{comment.author}}</a>
                             </li>
                             <li class="comment-info__time">{{comment.create_time|date:"d-m-Y H:i"}}</li>
                         </ul>
                         <p class="comment__text">{{comment.text}}</p>
+
+                        {% if comment.author.pk == request.user.pk or request.user.is_superuser %}
+                        <form class="del-comment-form" id="del-comment-{{comment.pk}}-form" method="POST" action="{% url "del_comment" comment.pk %}">
+                            {% csrf_token %}
+                            <a class="del-comment-form__item" href="#" onclick="document.getElementById('del-comment-{{comment.pk}}-form').submit();"><i class="bi bi-trash3"></i></a>
+                        </form>
+                        {% endif %}
                     </div>
                     <hr>
                     {% endfor %}
