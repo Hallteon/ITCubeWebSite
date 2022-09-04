@@ -56,3 +56,23 @@
 .article-container {
     margin: 25px auto auto;
 }
+
+.article-options__button {
+    background-color: inherit;
+    font-weight: 500;
+    border: 2px solid #0C1A22;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    transition: 0.5s;
+}
+
+.article-options__button:active {
+    background-color: grey;
+}
+
+.article-options__option, .article-options__option a {
+    color: #0C1A22;
+    font-weight: 500;
+    cursor: pointer;
+}

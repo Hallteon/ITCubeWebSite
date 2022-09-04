@@ -60,9 +60,27 @@
 
                 <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>
 
-                <ul class="d-flex article-statistic">
+                <ul class="d-flex align-items-center article-statistic">
                     <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count.all.count}}</li>
                     <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
+                    <li class="article-statistic__item article-options ms-auto">
+                        <button class="dropdown-toggle article-options__button" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item article-options__option">
+                                <a href="{% url "update_article" article.pk %}"><i class="bi bi-pencil"></i> Редактировать</a>
+                            </li>
+
+                            <li class="dropdown-item article-options__option">
+                                {% if article.author.pk == request.user.pk or request.user.is_superuser %}
+                                <form class="del-article-form" id="del-article-{{article.pk}}-form" method="POST" action="{% url "del_article" article.pk %}">
+                                    {% csrf_token %}
+                                    <a class="del-article-form__item" href="#" onclick="document.getElementById('del-article-{{article.pk}}-form').submit();"><i class="bi bi-trash3"></i>  Удалить</a>
+                                </form>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         {% endfor %}

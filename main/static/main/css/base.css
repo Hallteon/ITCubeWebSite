@@ -104,7 +104,7 @@ a.button {
 }
 
 .user-profile__btn {
-    background-color: #fbbe3a;
+    background-color: inherit;
     font-weight: 500;
     border: none;
     border-radius: 0;

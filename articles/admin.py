@@ -15,7 +15,7 @@ class ArticleAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
     form = AddCommentForm
-    list_display = ('author', 'article', 'text', 'create_time')
+    list_display = ('id', 'author', 'article', 'text', 'create_time')
     list_display_links = ('author', 'article')
     search_fields = ('author', 'article')
     list_filter = ('author',)

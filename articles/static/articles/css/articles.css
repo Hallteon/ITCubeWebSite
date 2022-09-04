@@ -145,7 +145,7 @@
 }
 
 .comments-container__message {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
 }
 
@@ -180,8 +180,12 @@
 }
 
 .del-comment-form__item {
+    display: block;
     color: #0C1A22;
     font-size: 17px;
+    text-align: right;
+    margin: 0;
+    transition: 0.5s;
 }
 
 .pagination {

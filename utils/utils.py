@@ -1,7 +1,5 @@
 from articles.models import Category, Tag
 
-title = ' | IT-Hogwarts'
-
 
 class DataMixin:
     paginate_by = 3
@@ -9,7 +7,7 @@ class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs
 
-        context['title'] = context['title'] + title
+        context['title'] = context['title']
 
         categories = Category.objects.all()
         context['categories'] = categories

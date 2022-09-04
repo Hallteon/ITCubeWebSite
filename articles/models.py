@@ -39,6 +39,7 @@ class Comment(models.Model):
     class Meta:
         verbose_name = 'Комментарий'
         verbose_name_plural = 'Комментарии'
+        ordering = ['-create_time']
 
 
 class Tag(models.Model):
