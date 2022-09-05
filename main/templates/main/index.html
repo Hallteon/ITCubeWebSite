@@ -2,11 +2,18 @@
 {% load static %}
 
 {% block styles %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="{% static 'main/css/index.css' %}">
 {% endblock %}
 
 {% block content %}
 <section class="home content">
-    <div class="container"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 home-description">
+                <p class="animate__animated animate__bounceInLeft home-description__title">IT CUBE HOGWARTS - платформа для изучения программирования.</p>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock %}

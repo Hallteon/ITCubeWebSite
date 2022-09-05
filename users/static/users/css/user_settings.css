@@ -5,10 +5,15 @@
 .settings {
     background-color: #fff;
     border-radius: 20px;
+    margin-top: 0;
     padding: 20px;
 }
 
 .settings-form__button {
     display: block;
     margin: 10px auto 0;
+}
+
+.sidebar {
+    margin-bottom: 20px;
 }

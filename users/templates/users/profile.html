@@ -10,80 +10,84 @@
 <section class="profile content">
     <div class="container">
         <div class="row">
-            <div class="col-sm-10 profile-info">
-                <ul class="d-flex align-items-center profile-info-list d-flex">
-                    <li class="d-flex align-items-center profile-info-list__item">
-                        <img class="profile-info__picture" src="{{profile.profile_picture.url}}" alt="Аватарка">
-                        <div class="d-flex flex-column profile-info-user">
-                            <p class="profile-info-user__username">{{profile.user.username}}</p>
-                            <p class="profile-info-user__name">{{profile.name}}</p>
-                        </div>
-                    </li>
-                </ul>
+            <div class="col-12">
+                <div class="col-lg-10 profile-info">
+                    <ul class="d-flex align-items-center profile-info-list d-flex">
+                        <li class="d-flex align-items-center profile-info-list__item">
+                            <img class="profile-info__picture" src="{{profile.profile_picture.url}}" alt="Аватарка">
+                            <div class="d-flex flex-column profile-info-user">
+                                <p class="profile-info-user__username">{{profile.user.username}}</p>
+                                <p class="profile-info-user__name">{{profile.name}}</p>
+                            </div>
+                        </li>
+                    </ul>
 
-                <p class="profile-info__xp">Количество опыта у пользователя: <strong>{{profile.xp}}XP</strong></p>
+                    <p class="profile-info__xp">Количество опыта у пользователя: <strong>{{profile.xp}}XP</strong></p>
+                </div>
             </div>
         </div>
 
         <div class="row user-categories">
-            <div class="col-sm-10 user-categories-nav">
-                <nav>
-                    <ul class="d-flex user-categories-list">
-                        <li class="user-categories-list__item">Статьи</li>
-                        <li class="user-categories-list__item">Задачи</li>
-                        <li class="user-categories-list__item">Проекты</li>
+            <div class="col-12">
+                <div class="col-lg-10 user-categories-nav">
+                    <nav>
+                        <ul class="d-flex user-categories-list">
+                            <li class="user-categories-list__item">Статьи</li>
+                            <li class="user-categories-list__item">Задачи</li>
+                            <li class="user-categories-list__item">Проекты</li>
+                        </ul>
+                    </nav>
+                </div>
+
+                {% for article in profile.user.articles.all %}
+                <div class="col-lg-10  article-container">
+                    <ul class="d-flex justify-content-between article-info">
+                        <li class="article-info__author">
+                            <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                            <a href="{{article.author.userprofile.get_absolute_url}}">{{article.author}}</a>
+                        </li>
+                        <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
                     </ul>
-                </nav>
-            </div>
 
-        {% for article in profile.user.articles.all %}
-            <div class="col-sm-10 article-container">
-                <ul class="d-flex justify-content-between article-info">
-                    <li class="article-info__author">
-                        <img class="article-info__author-avatar user-avatar" src="{{article.author.userprofile.profile_picture.url}}" alt="Аватарка">
-                        <a href="{{article.author.userprofile.get_absolute_url}}">{{article.author}}</a>
-                    </li>
-                    <li class="article-info__time">{{article.create_time|date:"d-m-Y H:i"}}</li>
-                </ul>
+                    <a href="{{article.get_absolute_url}}">
+                        <h2 class="article-container__title">{{article.title}}</h2>
+                    </a>
 
-                <a href="{{article.get_absolute_url}}">
-                    <h2 class="article-container__title">{{article.title}}</h2>
-                </a>
+                    {% if article.cover_image %}
+                    <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
+                    {% endif %}
 
-                {% if article.cover_image %}
-                <img class="article-container__image" src="{{article.cover_image.url}}" alt="изображение статьи">
-                {% endif %}
+                    {% autoescape on %}
+                    <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
+                    {% endautoescape %}
 
-                {% autoescape on %}
-                <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
-                {% endautoescape %}
+                    <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>
 
-                <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>
+                    <ul class="d-flex align-items-center article-statistic">
+                        <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count.all.count}}</li>
+                        <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
+                        {% if article.author.pk == request.user.pk or request.user.is_superuser %}
+                        <li class="article-statistic__item article-options ms-auto">
+                            <button class="dropdown-toggle article-options__button" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
 
-                <ul class="d-flex align-items-center article-statistic">
-                    <li class="article-statistic__item"><i class="bi bi-eye"></i> {{article.views_count.all.count}}</li>
-                    <li class="article-statistic__item"><i class="bi bi-chat-left"></i> {{article.comments.all.count}}</li>
-                    {% if article.author.pk == request.user.pk or request.user.is_superuser %}
-                    <li class="article-statistic__item article-options ms-auto">
-                        <button class="dropdown-toggle article-options__button" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item article-options__option">
+                                    <a href="{% url "update_article" article.pk %}"><i class="bi bi-pencil"></i> Редактировать</a>
+                                </li>
 
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item article-options__option">
-                                <a href="{% url "update_article" article.pk %}"><i class="bi bi-pencil"></i> Редактировать</a>
-                            </li>
-
-                            <li class="dropdown-item article-options__option">
-                                <form class="del-article-form" id="del-article-{{article.pk}}-form" method="POST" action="{% url "del_article" article.pk %}">
+                                <li class="dropdown-item article-options__option">
+                                    <form class="del-article-form" id="del-article-{{article.pk}}-form" method="POST" action="{% url "del_article" article.pk %}">
                                     {% csrf_token %}
                                     <a class="del-article-form__item" href="#" onclick="document.getElementById('del-article-{{article.pk}}-form').submit();"><i class="bi bi-trash3"></i>  Удалить</a>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                    {% endif %}
-                </ul>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+                {% endfor %}
             </div>
-        {% endfor %}
         </div>
     </div>
 </section>

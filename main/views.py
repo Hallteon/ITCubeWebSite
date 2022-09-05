@@ -1,8 +1,9 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def index(request):
-    return render(request, 'main/index.html', {'title': 'Главная'})
+class ShowHomePage(TemplateView):
+    template_name = 'main/index.html'
 
 
 def page_not_found(request, exception):

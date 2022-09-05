@@ -39,7 +39,7 @@
 }
 
 .tags-sidebar {
-    top: 0;
+    top: 80px;
     position: sticky;
     margin-top: 25px;
 }
