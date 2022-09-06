@@ -1,6 +1,13 @@
 .home {
-    background: -webkit-linear-gradient(180deg,#23379a,#09133c); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(180deg,#23379a,#09133c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #000428;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     padding-top: 20px;
+}
+
+.home-description {
+    text-align: center;
 }
 
 .home-description__title {
@@ -12,4 +19,42 @@
 
 .home-description__image {
     width: 100%;
+}
+
+.home-description__text {
+    color: lightgrey;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+a.home-description__button {
+    color: #fff;
+    font-weight: 600;
+    margin-top: 40px;
+}
+
+a.home-description__button:hover {
+    color: #0C1A22;
+}
+
+.home-info {
+    margin-top: 80px;
+}
+
+.home-info-list {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.home-info-list__item {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+@media (max-height: 576px) {
+    .home-description__title {
+        font-size: 36px;
+    }
 }
