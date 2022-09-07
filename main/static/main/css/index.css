@@ -1,8 +1,5 @@
 .home {
-    background: #000428;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #004e92, #000428);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left, #004e92, #000428); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background-color: #fff;
     padding-top: 20px;
 }
 
@@ -11,7 +8,6 @@
 }
 
 .home-description__title {
-    color: #fff;
     font-size: 48px;
     font-weight: 900;
     margin-top: 100px;
@@ -22,13 +18,11 @@
 }
 
 .home-description__text {
-    color: lightgrey;
     font-size: 24px;
     font-weight: 600;
 }
 
 a.home-description__button {
-    color: #fff;
     font-weight: 600;
     margin-top: 40px;
 }
@@ -38,7 +32,7 @@ a.home-description__button:hover {
 }
 
 .home-info {
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 .home-info-list {
@@ -47,7 +41,6 @@ a.home-description__button:hover {
 }
 
 .home-info-list__item {
-    color: #fff;
     font-size: 18px;
     font-weight: 600;
     padding-right: 10px;

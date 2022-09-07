@@ -44,7 +44,7 @@ class ShowArticles(DataMixin, ListView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-class ShowArticle(FormMixin, DataMixin, DetailView):
+class ShowArticle(LoginRequiredMixin, FormMixin, DataMixin, DetailView):
     model = Article
     template_name = 'articles/article.html'
     pk_url_kwarg = 'article_id'

@@ -57,6 +57,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'itcube.urls'
+LOGIN_URL = 'login'
 
 TEMPLATES = [
     {
