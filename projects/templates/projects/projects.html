@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'main/css/items_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="projects content">
+    <div class="container">
+        <div class="row">
+            {% for project in projects %}
+            <div class="col-12 project-container">
+                <ul class="d-flex justify-content-between project-info">
+                    <li class="project-info__author">
+                        <img class="project-info__author-avatar user-avatar" src="{{project.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                        <a href="{{article.author.userprofile.get_absolute_url}}">{{project.author}}</a>
+                    </li>
+                    <li class="project-info__time">{{project.create_time|date:"d-m-Y H:i"}}</li>
+                </ul>
+
+                <a href="{{article.get_absolute_url}}">
+                    <h2 class="project-container__title">{{project.name}}</h2>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

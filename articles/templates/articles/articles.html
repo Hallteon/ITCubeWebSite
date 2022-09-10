@@ -2,15 +2,11 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" href="{% static 'articles/css/articles.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/items_list.css' %}">
 {% endblock %}
 
 {% block content %}
-{% if page_obj.has_other_pages %}
 <section class="articles content">
-{% else %}
-<section class="articles content articles_one-page">
-{% endif %}
     <div class="container-fluid articles-header">
         <div class="row">
             <div class="col-12">
@@ -30,7 +26,7 @@
                             {% endfor %}
                         </ul>
 
-                        <div class="col-md-4 col-lg-2 articles-funcs">
+                        <div class="col-md-4 col-lg-2 ms-auto articles-funcs">
                             <a href="{% url 'add_article' %}">
                                 <div class="articles-funcs__button button">Написать статью <i class="bi bi-pencil"></i></div>
                             </a>
