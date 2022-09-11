@@ -7,6 +7,36 @@
 
 {% block content %}
 <section class="projects content">
+    <div class="container-fluid articles-header">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <nav class="row justify-content-between articles-navbar">
+                        <ul class="col-md-7 col-lg-10 col-xl-9 d-flex align-items-center justify-content-between categories">
+                            {% for category in categories %}
+                            {% if category.pk == selected_cat %}
+                            <li class="categories__item">
+                                <span>{{category.name}}</span>
+                            </li>
+                            {% else %}
+                            <li class="categories__item">
+                                <a href="{% url 'category_projects' category.slug %}">{{category.name}}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+
+                        <div class="col-md-4 col-lg-2 ms-auto project-options">
+                            <a href="{% url 'add_project' %}">
+                                <div class="project-options__button button">Добавить проект <i class="bi bi-plus-circle"></i></div>
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="row">
             {% for project in projects %}
@@ -14,7 +44,7 @@
                 <ul class="d-flex justify-content-between project-info">
                     <li class="project-info__author">
                         <img class="project-info__author-avatar user-avatar" src="{{project.author.userprofile.profile_picture.url}}" alt="Аватарка">
-                        <a href="{{article.author.userprofile.get_absolute_url}}">{{project.author}}</a>
+                        <a href="{{project.author.userprofile.get_absolute_url}}">{{project.author}}</a>
                     </li>
                     <li class="project-info__time">{{project.create_time|date:"d-m-Y H:i"}}</li>
                 </ul>

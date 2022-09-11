@@ -147,7 +147,7 @@ class DeleteArticle(DeleteView):
         return reverse_lazy('profile', kwargs={'profile_slug': self.get_object().author.username})
 
 
-class ShowCategory(DataMixin, ListView):
+class ShowCategoryArticles(DataMixin, ListView):
     model = Article
     template_name = 'articles/articles.html'
     context_object_name = 'articles'
@@ -167,7 +167,7 @@ class ShowCategory(DataMixin, ListView):
         return dict(list(context.items()) + list(c_def.items()))
 
 
-class ShowTag(DataMixin, ListView):
+class ShowTagArticles(DataMixin, ListView):
     model = Article
     template_name = 'articles/articles.html'
     context_object_name = 'articles'

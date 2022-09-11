@@ -36,3 +36,7 @@
 .form__errors {
     color: #ff2121;
 }
+
+.form__space {
+    margin-top: 20px;
+}

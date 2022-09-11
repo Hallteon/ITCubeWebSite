@@ -1,0 +1,78 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="add-project content">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-10 form-container">
+                <form class="form" method="post">
+                    {% csrf_token %}
+
+                    <div class="text-center form__errors">{{form.non_field_errors}}</div>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.name.id_for_label}}">{{form.name.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            {{form.name}}
+                        </div>
+                        <div class="form__errors">{{form.name.errors}}</div>
+
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.content.id_for_label}}">{{form.content.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form__editor-textarea">{{form.content}}</div>
+                        </div>
+                        <div class="form__errors">{{form.content.errors}}</div>
+
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.category.id_for_label}}">{{form.category.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div>{{form.category}}</div>
+                        </div>
+                        <div class="form__errors">{{form.category.errors}}</div>
+
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.tags.id_for_label}}">{{form.tags.label}}: </label>
+                        </div>
+                        <div class="col-12 col-sm-8">
+                            <div class="row">
+                                {% for tag in form.tags %}
+                                <div class="col-6 col-md-4 col-xl-3">{{tag}}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="form__errors">{{form.tags.errors}}</div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label class="form__label" for="{{form.public.id_for_label}}">{{form.public.label}}: </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <div>{{form.public}}</div>
+                    </div>
+                    <div class="form__errors">{{form.public.errors}}</div>
+
+                    <button class="form__button button" type="submit">Создать проект</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock %}
