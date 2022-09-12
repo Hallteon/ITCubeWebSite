@@ -6,6 +6,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
+<link rel="stylesheet" href="{% static 'projects/css/add_project.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -46,7 +47,7 @@
                         <div class="col-sm-4">
                             <label class="form__label" for="{{form.tags.id_for_label}}">{{form.tags.label}}: </label>
                         </div>
-                        <div class="col-12 col-sm-8">
+                        <div class="col-sm-8">
                             <div class="row">
                                 {% for tag in form.tags %}
                                 <div class="col-6 col-md-4 col-xl-3">{{tag}}</div>
@@ -54,15 +55,15 @@
                             </div>
                         </div>
                         <div class="form__errors">{{form.tags.errors}}</div>
-                    </div>
 
-                    <div class="col-sm-4">
-                        <label class="form__label" for="{{form.public.id_for_label}}">{{form.public.label}}: </label>
+                        <div class="col-sm-4 form__space">
+                            <label class="form__label" for="{{form.public.id_for_label}}">{{form.public.label}}: </label>
+                        </div>
+                        <div class="col-sm-8 form__space">
+                            <div>{{form.public}}</div>
+                        </div>
+                        <div class="form__errors">{{form.public.errors}}</div>
                     </div>
-                    <div class="col-sm-8">
-                        <div>{{form.public}}</div>
-                    </div>
-                    <div class="form__errors">{{form.public.errors}}</div>
 
                     <button class="form__button button" type="submit">Создать проект</button>
                 </form>

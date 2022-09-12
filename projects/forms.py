@@ -12,6 +12,6 @@ class AddProjectForm(forms.ModelForm):
                                                   'placeholder': 'Введите название проекта'}),
                    'content': CKEditorUploadingWidget(attrs={'class': 'form-control form-input form__input add-project-form__textarea',
                                                              'placeholder': 'Введите текст статьи'}),
-                   'category': forms.Select(attrs={'class': 'form-control form-input form__input form__space'}),
+                   'category': forms.Select(attrs={'class': 'form-control form-input form__input'}),
                    'tags': forms.CheckboxSelectMultiple(attrs={'class': 'form__checkbox'}),
                    'public': forms.NullBooleanSelect(attrs={'class': 'form-control form-input form__input'})}

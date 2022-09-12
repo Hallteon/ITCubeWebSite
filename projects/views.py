@@ -1,5 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
+from slugify import slugify
 
 from articles.models import Category, Tag
 from projects.forms import AddProjectForm
@@ -15,6 +17,7 @@ class AddProject(CreateView):
     def form_valid(self, form):
         self.obj = form.save(commit=False)
         self.obj.author = self.request.user
+        self.obj.slug = slugify(self.obj.name)
         self.obj.save()
 
         return super().form_valid(form)
@@ -38,6 +41,20 @@ class ShowProjects(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Проекты'
         context['categories'] = Category.objects.all()
+        context['tags'] = Tag.objects.all()
+
+        return context
+
+
+class ShowProject(LoginRequiredMixin, DataMixin, DetailView):
+    model = Project
+    template_name = 'projects/project.html'
+    slug_url_kwarg = 'project_slug'
+    context_object_name = 'project'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = context['project']
 
         return context
 

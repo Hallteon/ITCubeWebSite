@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'main/css/items_list.css' %}">
+<link rel="stylesheet" href="{% static 'projects/css/projects.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -38,22 +39,44 @@
     </div>
 
     <div class="container">
-        <div class="row">
-            {% for project in projects %}
-            <div class="col-12 project-container">
-                <ul class="d-flex justify-content-between project-info">
-                    <li class="project-info__author">
-                        <img class="project-info__author-avatar user-avatar" src="{{project.author.userprofile.profile_picture.url}}" alt="Аватарка">
-                        <a href="{{project.author.userprofile.get_absolute_url}}">{{project.author}}</a>
-                    </li>
-                    <li class="project-info__time">{{project.create_time|date:"d-m-Y H:i"}}</li>
-                </ul>
+        <div class="row justify-content-between">
+            <div class="col-lg-10">
+                {% for project in projects %}
+                <div class="col-12 project-container">
+                    <ul class="d-flex justify-content-between project-info">
+                        <li class="project-info__author">
+                            <img class="project-info__author-avatar user-avatar" src="{{project.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                            <a href="{{project.author.userprofile.get_absolute_url}}">{{project.author}}</a>
+                        </li>
+                        <li class="project-info__time">{{project.create_time|date:"d-m-Y H:i"}}</li>
+                    </ul>
 
-                <a href="{{article.get_absolute_url}}">
-                    <h2 class="project-container__title">{{project.name}}</h2>
-                </a>
+                    <a href="{{project.get_absolute_url}}">
+                        <h2 class="project-container__title">{{project.name}}</h2>
+                    </a>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+
+            <div class="col-lg-2">
+                <aside class="tags-sidebar sidebar">
+                    <p class=""><strong>Теги:</strong></p>
+
+                    <ul class="sidebar-list">
+                        {% for tag in tags %}
+                        {% if tag.pk == selected_tag %}
+                        <li class="sidebar-list__item">
+                            <span class="selected-tag">{{tag.name}}</span>
+                        </li>
+                        {% else %}
+                        <li class="sidebar-list__item">
+                            <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </aside>
+            </div>
         </div>
     </div>
 </section>
