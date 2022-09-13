@@ -52,8 +52,12 @@
                     </ul>
 
                     <a href="{{project.get_absolute_url}}">
-                        <h2 class="project-container__title">{{project.name}}</h2>
+                        <p class="project-container__title">{{project.name}}</p>
                     </a>
+
+                    {% autoescape on %}
+                    <p class="project-container__description">{{project.description|safe|linebreaks|truncatewords:50}}</p>
+                    {% endautoescape %}
                 </div>
                 {% endfor %}
             </div>

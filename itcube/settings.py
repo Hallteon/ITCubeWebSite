@@ -162,7 +162,7 @@ CKEDITOR_CONFIGS = {
         'toolbarCanCollapse': False,
         'forcePasteAsPlainText': True,
         'font_defaultLabel': 'Inter',
-        'fontSize_defaultLabel': '16px',
+        'fontSize_defaultLabel': '18px',
         'codeSnippet_theme': 'foundation',
     }
 }

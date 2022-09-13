@@ -2,9 +2,6 @@
 {% load static %}
 
 {% block styles %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'main/css/forms.css' %}">
 <link rel="stylesheet" href="{% static 'projects/css/add_project.css' %}">
 {% endblock %}
@@ -27,6 +24,14 @@
                             {{form.name}}
                         </div>
                         <div class="form__errors">{{form.name.errors}}</div>
+
+                        <div class="col-sm-4">
+                            <label class="form__label" for="{{form.content.id_for_label}}">{{form.description.label}}: </label>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="form__editor-textarea">{{form.description}}</div>
+                        </div>
+                        <div class="form__errors">{{form.description.errors}}</div>
 
                         <div class="col-sm-4">
                             <label class="form__label" for="{{form.content.id_for_label}}">{{form.content.label}}: </label>

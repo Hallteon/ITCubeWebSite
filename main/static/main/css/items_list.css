@@ -94,7 +94,7 @@
     width: 100%;
 }
 
-.article-container__title, .project-container__title {
+.article-container__title {
     color: #0C1A22;
     font-weight: 800;
 }

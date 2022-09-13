@@ -3,15 +3,56 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'main/css/items_list.css' %}">
+<link rel="stylesheet" href="{% static 'projects/css/projects.css' %}">
+<link rel="stylesheet" href="{% static 'projects/css/project.css' %}">
 {% endblock %}
 
 {% block content %}
 <section class="project content">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-sm-10">
-                <p>{{project.name}}</p>
-                <p>{{project.author}}</p>
+        <div class="row justify-content-between">
+            <div class="col-sm-9">
+                <div class="col-12 project-container">
+                    <p class="project-container__bio"><a class="" href="{{project.author.userprofile.get_absolute_url}}">{{project.author}}</a> / {{project.name}}</p>
+                </div>
+
+                <div class="col-12 project-container">
+                    <p class="project-container__title">{{project.name}}</p>
+                    <p class="project-container__text">{{project.content|safe}}</p>
+                </div>
+            </div>
+
+            <div class="col-sm-3">
+                <aside class="project-sidebar sidebar">
+                    <div class="project-sidebar-bar project-sidebar-description">
+                        <p class="project-sidebar-description__label"><strong>Описание:</strong></p>
+                        <p class="project-sidebar-description__text">{{project.description}}</p>
+                    </div>
+
+                    <div class="project-sidebar-bar project-sidebar-tags">
+                        <p><strong>Теги:</strong></p>
+
+                        <ul class="sidebar-list">
+                            {% for tag in project.tags.all %}
+                            <li class="sidebar-list__item">
+                                <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="project-sidebar-bar project-sidebar-members">
+                        <p><strong>Участники:</strong></p>
+
+                        <ul class="sidebar-list">
+                            {% for member in project.members.all %}
+                            <li class="sidebar-list__item">
+                                <a href="{{member.userprofile.get_absolute_url}}">{{member.username}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </aside>
             </div>
         </div>
     </div>

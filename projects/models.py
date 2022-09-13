@@ -11,6 +11,7 @@ class Project(models.Model):
     name = models.CharField(max_length=350, verbose_name='Название')
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='projects', verbose_name='Автор')
     members = models.ManyToManyField(User, blank=True, verbose_name='Участники')
+    description = models.CharField(blank=True, max_length=650, verbose_name='Описание')
     content = RichTextUploadingField(null=True, verbose_name='Текст')
     category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.PROTECT, verbose_name='Категория')
     tags = models.ManyToManyField(Tag, verbose_name='Тэги')

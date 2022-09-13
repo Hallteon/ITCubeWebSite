@@ -1,0 +1,28 @@
+.project-container__bio {
+    font-weight: 500;
+}
+
+.project-container__bio a {
+    color: #0C1A22;
+    font-weight: 600;
+}
+
+.project-container__text {
+    margin-top: 5px;
+}
+
+.project-sidebar {
+    margin-top: 25px;
+}
+
+.project-sidebar-bar {
+    margin-bottom: 10px;
+}
+
+.project-sidebar-bar:last-child {
+    margin-bottom: 0;
+}
+
+.project-sidebar-description__text {
+    font-weight: 500;
+}
