@@ -20,6 +20,9 @@ class AddProject(CreateView):
         self.obj.slug = slugify(self.obj.name)
         self.obj.save()
 
+        self.obj.members.add(self.request.user)
+        self.obj.save()
+
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -57,43 +60,3 @@ class ShowProject(LoginRequiredMixin, DataMixin, DetailView):
         context['title'] = context['project']
 
         return context
-
-
-class ShowCategoryProjects(DataMixin, ListView):
-    model = Project
-    template_name = 'projects/projects.html'
-    context_object_name = 'projects'
-    allow_empty = True
-
-    def get_queryset(self):
-        return Project.objects.filter(category__slug=self.kwargs['category_slug'], public=True).order_by('-create_time').select_related('category')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tags'] = Tag.objects.filter(category__slug=self.kwargs['category_slug'])
-        context['category'] = Category.objects.get(slug=self.kwargs['category_slug'])
-
-        selected_cat = Category.objects.get(slug=self.kwargs['category_slug'])
-        c_def = self.get_user_context(title=str(selected_cat.name), selected_cat=selected_cat.pk)
-
-        return dict(list(context.items()) + list(c_def.items()))
-
-
-class ShowTagProjects(DataMixin, ListView):
-    model = Project
-    template_name = 'projects/projects.html'
-    context_object_name = 'projects'
-    allow_empty = True
-
-    def get_queryset(self):
-        return Project.objects.filter(tags__slug=self.kwargs['tag_slug'], public=True).order_by('-create_time')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tags'] = Tag.objects.all()
-        context['tag'] = Tag.objects.get(slug=self.kwargs['tag_slug'])
-
-        selected_tag = Tag.objects.get(slug=self.kwargs['tag_slug'])
-        c_def = self.get_user_context(title=str(selected_tag.name), selected_tag=selected_tag.pk)
-
-        return dict(list(context.items()) + list(c_def.items()))

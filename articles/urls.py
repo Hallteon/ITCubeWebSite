@@ -7,7 +7,5 @@ urlpatterns = [
     path('add_article/', AddArticle.as_view(), name='add_article'),
     path('update_article/<int:article_id>/', UpdateArticle.as_view(), name='update_article'),
     path('delete_article/<int:article_id>/', DeleteArticle.as_view(), name='del_article'),
-    path('category/<slug:category_slug>/', ShowCategoryArticles.as_view(), name='category'),
-    path('tag/<slug:tag_slug>/', ShowTagArticles.as_view(), name='tag'),
     path('comments/delete_comment/<int:comment_id>/', DeleteComment.as_view(), name='del_comment'),
 ]

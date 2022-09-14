@@ -2,9 +2,9 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
 
-from articles.models import Tag, Category
+from categories.models import Category
+from tags.models import Tag
 
 
 class Project(models.Model):

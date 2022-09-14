@@ -1,3 +1,7 @@
+.articles, .projects {
+    padding-bottom: 25px;
+}
+
 .articles-header {
     background-color: #fff;
     padding-top: 15px;
@@ -141,8 +145,9 @@
 }
 
 .comments-container__message {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 500;
+    margin-top: 6px;
 }
 
 .comments-container__require {
@@ -188,7 +193,7 @@
     background-color: #fff;
     border-radius: 20px;
     padding: 20px;
-    margin: 25px 0 25px;
+    margin-top: 25px;
 }
 
 .pagination-button {

@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'captcha',
     'ckeditor',
     'main.apps.MainConfig',
+    'categories.apps.CategoriesConfig',
+    'tags.apps.TagsConfig',
     'users.apps.UsersConfig',
     'articles.apps.ArticlesConfig',
     'projects.apps.ProjectsConfig'
@@ -144,13 +146,14 @@ CKEDITOR_CONFIGS = {
              '-', 'Table',
              '-', 'Image',
              '-', 'Source',
-             '-', 'NumberedList', 'BulletedList'
+             '-', 'NumberedList', 'BulletedList',
+             'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
             ],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',
-             '-', 'TextColor',
+            ['-', 'TextColor',
              '-', 'HorizontalRule',
              '-', 'Blockquote',
-             '-', 'CodeSnippet'
+             '-', 'FontSize',
+             '-', 'CodeSnippet',
             ]
         ],
         'extraPlugins': ','.join(
@@ -162,10 +165,11 @@ CKEDITOR_CONFIGS = {
         'toolbarCanCollapse': False,
         'forcePasteAsPlainText': True,
         'font_defaultLabel': 'Inter',
-        'fontSize_defaultLabel': '18px',
+        'fontSize_sizes': '16px;',
         'codeSnippet_theme': 'foundation',
     }
 }
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 # Default primary key field type

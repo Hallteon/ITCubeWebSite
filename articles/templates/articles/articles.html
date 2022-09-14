@@ -83,7 +83,7 @@
                     {% endif %}
 
                     {% autoescape on %}
-                    <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:50}}</p>
+                    <p class="article-container__content">{{article.content|safe|linebreaks|truncatewords:40}}</p>
                     {% endautoescape %}
 
                     <a class="article-container__button button" href="{{article.get_absolute_url}}">Читать дальше</a>

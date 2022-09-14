@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from articles.forms import ArticleAdminForm, AddCommentForm
-from articles.models import Category, Article, Tag, Comment
+from articles.models import Article, Comment
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -21,21 +21,5 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = ('author',)
 
 
-class TagAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'category')
-    list_display_links = ('id', 'name', 'category')
-    search_fields = ('name',)
-    prepopulated_fields = {"slug": ("name",)}
-
-
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-    list_display_links = ('id', 'name')
-    search_fields = ('name',)
-    prepopulated_fields = {"slug": ("name",)}
-
-
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(Tag, TagAdmin)
-admin.site.register(Category, CategoryAdmin)

@@ -1,4 +1,4 @@
-from articles.models import Category, Tag
+from categories.models import Category
 
 
 class DataMixin:

@@ -1,12 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import F
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import FormMixin, DeleteView, UpdateView
 
 from articles.forms import AddArticleForm, AddCommentForm, UpdateArticleForm
-from articles.models import Article, Category, Tag, Comment
+from articles.models import Article, Comment
+from tags.models import Tag
 from utils.utils import DataMixin
 
 
@@ -145,43 +145,3 @@ class DeleteArticle(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('profile', kwargs={'profile_slug': self.get_object().author.username})
-
-
-class ShowCategoryArticles(DataMixin, ListView):
-    model = Article
-    template_name = 'articles/articles.html'
-    context_object_name = 'articles'
-    allow_empty = True
-
-    def get_queryset(self):
-        return Article.objects.filter(category__slug=self.kwargs['category_slug'], is_published=True).order_by('-create_time').select_related('category')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tags'] = Tag.objects.filter(category__slug=self.kwargs['category_slug'])
-        context['category'] = Category.objects.get(slug=self.kwargs['category_slug'])
-
-        selected_cat = Category.objects.get(slug=self.kwargs['category_slug'])
-        c_def = self.get_user_context(title=str(selected_cat.name), selected_cat=selected_cat.pk)
-
-        return dict(list(context.items()) + list(c_def.items()))
-
-
-class ShowTagArticles(DataMixin, ListView):
-    model = Article
-    template_name = 'articles/articles.html'
-    context_object_name = 'articles'
-    allow_empty = True
-
-    def get_queryset(self):
-        return Article.objects.filter(tags__slug=self.kwargs['tag_slug'], is_published=True).order_by('-create_time')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tags'] = Tag.objects.all()
-        context['tag'] = Tag.objects.get(slug=self.kwargs['tag_slug'])
-
-        selected_tag = Tag.objects.get(slug=self.kwargs['tag_slug'])
-        c_def = self.get_user_context(title=str(selected_tag.name), selected_tag=selected_tag.pk)
-
-        return dict(list(context.items()) + list(c_def.items()))
