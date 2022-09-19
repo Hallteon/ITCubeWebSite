@@ -41,6 +41,18 @@
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-lg-10">
+                {% if selected_tag %}
+                <div class="col-12 section-description">
+                    <p class="section-description__name">{{tag.name}}</p>
+                    <p class="section-description__description">{{tag.description}}</p>
+                </div>
+                {% elif selected_cat %}
+                <div class="col-12 section-description">
+                    <p class="section-description__name">{{category.name}}</p>
+                    <p class="section-description__description">{{category.description}}</p>
+                </div>
+                {% endif %}
+
                 {% for project in projects %}
                 <div class="col-12 project-container">
                     <ul class="d-flex justify-content-between project-info">
@@ -74,7 +86,7 @@
                         </li>
                         {% else %}
                         <li class="sidebar-list__item">
-                            <a href="{{tag.get_absolute_url}}">{{tag.name}}</a>
+                            <a href="{% url 'tag_projects' tag.slug %}">{{tag.name}}</a>
                         </li>
                         {% endif %}
                         {% endfor %}

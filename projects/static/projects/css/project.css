@@ -26,3 +26,7 @@
 .project-sidebar-description__text {
     font-weight: 500;
 }
+
+.project-container__title:hover {
+    color: #0C1A22;
+}
