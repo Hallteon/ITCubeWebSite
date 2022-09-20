@@ -20,9 +20,11 @@
                     <p class="project-container__title">{{project.name}}</p>
                     <p class="project-container__text">{{project.content|safe}}</p>
 
+                    {% if request.user not in project.members.all %}
                     <a href="{% url 'send_project_application' project.slug %}">
                         <div class="project-container__button button">Присоединиться к проекту</div>
                     </a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -50,7 +52,7 @@
 
                         <ul class="sidebar-list">
                             {% for member in project.members.all %}
-                            {% if member == request.user %}
+                            {% if project.author == member %}
                             <li class="sidebar-list__item">
                                 <a href="{{member.userprofile.get_absolute_url}}"><i class="bi bi-star-fill"></i> {{member.username}} <i class="bi bi-star-fill"></i></a>
                             </li>

@@ -17,7 +17,10 @@
                         <p class="application-container__author">{{application.user}}</p>
                         <p>{{application.text}}</p>
 
-                        <a class="application-container__confirm" href="#"><i class="bi bi-check-lg"></i></a>
+                        <form id="confirm-application-{{application.pk}}-form" method="POST" action="{% url "confirm_project_application" application.pk %}">
+                            {% csrf_token %}
+                            <a class="application-container__confirm" href="#" onclick="document.getElementById('confirm-application-{{application.pk}}-form').submit();"><i class="bi bi-check-lg"></i></a>
+                        </form>
                     </div>
                     {% endfor %}
                 {% endfor %}
