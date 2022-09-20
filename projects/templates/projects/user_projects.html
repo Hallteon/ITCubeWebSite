@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'main/css/items_list.css' %}">
+<link rel="stylesheet" href="{% static 'projects/css/user_projects.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="user-projects content">
+    <div class="container">
+        <div class="row">
+            <div class="d-flex justify-content-center col-12 projects">
+                {% for project in projects %}
+                    {% for application in project.applications.all %}
+                    <div class="col-lg-10 application-container">
+                        <p class="application-container__author">{{application.user}}</p>
+                        <p>{{application.text}}</p>
+
+                        <a class="application-container__confirm" href="#"><i class="bi bi-check-lg"></i></a>
+                    </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

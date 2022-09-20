@@ -11,7 +11,7 @@
 <section class="project content">
     <div class="container">
         <div class="row justify-content-between">
-            <div class="col-sm-9">
+            <div class="col-md-9">
                 <div class="col-12 project-container">
                     <p class="project-container__bio"><a class="" href="{{project.author.userprofile.get_absolute_url}}">{{project.author}}</a> / {{project.name}}</p>
                 </div>
@@ -19,10 +19,14 @@
                 <div class="col-12 project-container">
                     <p class="project-container__title">{{project.name}}</p>
                     <p class="project-container__text">{{project.content|safe}}</p>
+
+                    <a href="{% url 'send_project_application' project.slug %}">
+                        <div class="project-container__button button">Присоединиться к проекту</div>
+                    </a>
                 </div>
             </div>
 
-            <div class="col-sm-3">
+            <div class="col-md-3">
                 <aside class="project-sidebar sidebar">
                     <div class="project-sidebar-bar project-sidebar-description">
                         <p class="project-sidebar-description__label"><strong>Описание:</strong></p>
@@ -46,9 +50,15 @@
 
                         <ul class="sidebar-list">
                             {% for member in project.members.all %}
+                            {% if member == request.user %}
+                            <li class="sidebar-list__item">
+                                <a href="{{member.userprofile.get_absolute_url}}"><i class="bi bi-star-fill"></i> {{member.username}} <i class="bi bi-star-fill"></i></a>
+                            </li>
+                            {% else %}
                             <li class="sidebar-list__item">
                                 <a href="{{member.userprofile.get_absolute_url}}">{{member.username}}</a>
                             </li>
+                            {% endif %}
                             {% endfor %}
                         </ul>
                     </div>

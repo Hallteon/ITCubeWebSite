@@ -1,7 +1,7 @@
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 
-from projects.models import Project
+from projects.models import Project, ProjectApplication
 
 
 class AddProjectForm(forms.ModelForm):
@@ -18,3 +18,11 @@ class AddProjectForm(forms.ModelForm):
                    'category': forms.Select(attrs={'class': 'form-control form-input form__input'}),
                    'tags': forms.CheckboxSelectMultiple(attrs={'class': 'form__checkbox'}),
                    'public': forms.NullBooleanSelect(attrs={'class': 'form-control form-input form__input'})}
+
+
+class SendProjectApplicationForm(forms.ModelForm):
+    class Meta:
+        model = ProjectApplication
+        fields = ('text',)
+        widgets = {'text': forms.Textarea(attrs={'class': 'form-control form-input form__input',
+                                                 'placeholder': 'Введите текст заявки'})}

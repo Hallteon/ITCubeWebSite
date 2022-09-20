@@ -11,6 +11,14 @@
     margin-top: 5px;
 }
 
+.project-container__button {
+    margin-top: 10px;
+}
+
+.project-sidebar {
+    margin-bottom: 25px;
+}
+
 .project-sidebar {
     margin-top: 25px;
 }
