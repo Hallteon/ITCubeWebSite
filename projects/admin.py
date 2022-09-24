@@ -1,5 +1,5 @@
 from django.contrib import admin
-from projects.models import Project
+from projects.models import Project, ProjectApplication
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -10,4 +10,9 @@ class ProjectAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+class ProjectApplicationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'project', 'text', 'create_time')
+
+
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(ProjectApplication, ProjectApplicationAdmin)

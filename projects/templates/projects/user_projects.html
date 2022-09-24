@@ -9,20 +9,57 @@
 {% block content %}
 <section class="user-projects content">
     <div class="container">
-        <div class="row">
-            <div class="d-flex justify-content-center col-12 projects">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-10 projects">
                 {% for project in projects %}
-                    {% for application in project.applications.all %}
-                    <div class="col-lg-10 application-container">
-                        <p class="application-container__author">{{application.user}}</p>
-                        <p>{{application.text}}</p>
+                <div class="col-12 project-container">
+                    <ul class="d-flex justify-content-between project-info">
+                        <li class="project-info__author">
+                            <img class="project-info__author-avatar user-avatar" src="{{project.author.userprofile.profile_picture.url}}" alt="Аватарка">
+                            <a href="{{project.author.userprofile.get_absolute_url}}">{{project.author}}</a>
+                        </li>
+                        <li class="project-info__time">{{project.create_time|date:"d-m-Y H:i"}}</li>
+                    </ul>
 
-                        <form id="confirm-application-{{application.pk}}-form" method="POST" action="{% url "confirm_project_application" application.pk %}">
+                    <a href="{{project.get_absolute_url}}">
+                        <p class="project-container__title">{{project.name}}</p>
+                    </a>
+
+                    {% autoescape on %}
+                    <p class="project-container__description">{{project.description|safe|linebreaks|truncatewords:50}}</p>
+                    {% endautoescape %}
+                </div>
+
+                <div class="applications">
+                    <p class="applications__title">Заявки на проект:</p>
+                </div>
+
+                {% for application in project.applications.all %}
+                <div class="col-12 application-container">
+                    <p class="application-container__author">{{application.user}}</p>
+                    <p>{{application.text}}</p>
+
+                    <ul class="d-flex application-container-options">
+                        <li class="application-container-options__item">
+                            <form id="confirm-application-{{application.pk}}-form" method="POST" action="{% url "confirm_project_application" application.pk %}">
                             {% csrf_token %}
                             <a class="application-container__confirm" href="#" onclick="document.getElementById('confirm-application-{{application.pk}}-form').submit();"><i class="bi bi-check-lg"></i></a>
-                        </form>
-                    </div>
-                    {% endfor %}
+                            </form>
+                        </li>
+
+                        <li class="application-container-options__item">
+                            <form id="reject-application-{{application.pk}}-form" method="POST" action="{% url "reject_project_application" application.pk %}">
+                            {% csrf_token %}
+                            <a class="application-container__reject" href="#" onclick="document.getElementById('reject-application-{{application.pk}}-form').submit();"><i class="bi bi-x-lg"></i></a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+                {% endfor %}
+
+                {% if project.pk is not projects.last.pk %}
+                <hr class="projects-space">
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

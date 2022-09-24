@@ -19,3 +19,13 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профиля'
+
+
+class Notice(models.Model):
+    user_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications', verbose_name='Пользователь')
+    text = models.TextField(verbose_name='Текст')
+    create_time = models.DateTimeField(auto_now=True, verbose_name='Дата отправки')
+
+    class Meta:
+        verbose_name = 'Уведомление'
+        verbose_name_plural = 'Уведомления'

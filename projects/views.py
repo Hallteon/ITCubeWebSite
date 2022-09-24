@@ -8,6 +8,7 @@ from slugify import slugify
 from articles.models import Category, Tag
 from projects.forms import AddProjectForm, SendProjectApplicationForm
 from projects.models import Project, ProjectApplication
+from users.models import Notice
 from utils.utils import DataMixin
 
 
@@ -101,7 +102,7 @@ class SendProjectApplication(LoginRequiredMixin, CreateView):
         return context
 
 
-class ConfirmProjectApplication(DeleteView):
+class ConfirmProjectApplication(DataMixin, DeleteView):
     model = ProjectApplication
     pk_url_kwarg = 'application_id'
 
@@ -109,12 +110,15 @@ class ConfirmProjectApplication(DeleteView):
         Project.objects.get(slug=self.get_object().project.slug).members.add(self.get_object().user)
         Project.objects.get(slug=self.get_object().project.slug).save()
 
+        self.send_notice(user_to=self.get_object().user,
+                         text=f'Ваша заявка на проект "{self.get_object().project.name}" была принята!')
+
         return super().form_valid(form)
 
     def delete(self, request, *args, **kwargs):
         self.obj = self.get_object()
 
-        if self.obj.user.pk == self.request.user.pk or self.request.user.is_superuser():
+        if self.obj.project.author.pk == self.request.user.pk or self.request.user.is_superuser():
             self.success_url = self.get_success_url()
 
             self.obj.delete()
@@ -123,3 +127,27 @@ class ConfirmProjectApplication(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('project', kwargs={'project_slug': self.get_object().project.slug})
+
+
+class RejectProjectApplication(DataMixin, DeleteView):
+    model = ProjectApplication
+    pk_url_kwarg = 'application_id'
+
+    def form_valid(self, form):
+        self.send_notice(user_to=self.get_object().user,
+                         text=f'Ваша заявка на проект "{self.get_object().project.name}" была отколнена!')
+
+        return super().form_valid(form)
+
+    def delete(self, request, *args, **kwargs):
+        self.obj = self.get_object()
+
+        if self.obj.project.author.pk == self.request.user.pk or self.request.user.is_superuser():
+            self.success_url = self.get_success_url()
+
+            self.obj.delete()
+
+            return HttpResponseRedirect(self.success_url)
+
+    def get_success_url(self):
+        return reverse_lazy('user_projects')

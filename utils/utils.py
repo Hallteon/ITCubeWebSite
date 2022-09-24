@@ -1,4 +1,5 @@
 from categories.models import Category
+from users.models import Notice
 
 
 class DataMixin:
@@ -19,3 +20,6 @@ class DataMixin:
             context['selected_tag'] = 0
 
         return context
+
+    def send_notice(self, user_to, text):
+        Notice.objects.create(user_to=user_to, text=text)

@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
 from django import forms
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView
 from users.forms import RegisterUserForm, LoginUserForm, UserSettingsForm, ProfileSettingsForm
-from users.models import UserProfile
+from users.models import UserProfile, Notice
 from utils.utils import DataMixin
 
 from django.shortcuts import render, redirect
@@ -67,6 +67,21 @@ class ShowUserProfile(LoginRequiredMixin, DataMixin, DetailView):
         c_def = self.get_user_context(title='Пользователь')
 
         return dict(list(context.items()) + list(c_def.items()))
+
+
+class ShowNotices(LoginRequiredMixin, ListView):
+    model = Notice
+    template_name = 'users/notifications.html'
+    context_object_name = 'notifications'
+
+    def get_queryset(self):
+        return Notice.objects.filter(user_to=self.request.user).order_by('-create_time')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Уведомления'
+
+        return context
 
 
 class RegisterUser(DataMixin, CreateView):
