@@ -54,7 +54,7 @@
                             {% for member in project.members.all %}
                             {% if project.author == member %}
                             <li class="sidebar-list__item">
-                                <a href="{{member.userprofile.get_absolute_url}}"><i class="bi bi-star-fill"></i> {{member.username}} <i class="bi bi-star-fill"></i></a>
+                                <a href="{{member.userprofile.get_absolute_url}}"><i class="bi bi-star-fill"></i> {{member.username}}</a>
                             </li>
                             {% else %}
                             <li class="sidebar-list__item">

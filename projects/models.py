@@ -28,17 +28,3 @@ class Project(models.Model):
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
-
-
-class ProjectApplication(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='applications', verbose_name='Автор')
-    project = models.ForeignKey('Project', on_delete=models.CASCADE, related_name='applications', verbose_name='Проект')
-    text = models.TextField(verbose_name='Текст заявки')
-    create_time = models.DateTimeField(auto_now_add=True, verbose_name='Дата отправки')
-
-    def __str__(self):
-        return self.user
-
-    class Meta:
-        verbose_name = 'Заявка'
-        verbose_name_plural = 'Заявки'

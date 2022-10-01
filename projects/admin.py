@@ -1,5 +1,5 @@
 from django.contrib import admin
-from projects.models import Project, ProjectApplication
+from projects.models import Project
 
 
 class ProjectAdmin(admin.ModelAdmin):
@@ -15,4 +15,3 @@ class ProjectApplicationAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Project, ProjectAdmin)
-admin.site.register(ProjectApplication, ProjectApplicationAdmin)
