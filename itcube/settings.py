@@ -45,9 +45,9 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
     'tags.apps.TagsConfig',
     'users.apps.UsersConfig',
-    'notifications.apps.NotificationsConfig',
     'articles.apps.ArticlesConfig',
-    'projects.apps.ProjectsConfig'
+    'projects.apps.ProjectsConfig',
+    'notifications.apps.NotificationsConfig'
 ]
 
 MIDDLEWARE = [

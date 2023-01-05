@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -68,6 +69,8 @@ class ShowArticle(LoginRequiredMixin, FormMixin, DataMixin, DetailView):
         obj.author = self.request.user
         obj.article = self.get_object()
         obj.save()
+
+        messages.success(self.request, 'Вы добавили комментарий.')
 
         return super().form_valid(form)
 

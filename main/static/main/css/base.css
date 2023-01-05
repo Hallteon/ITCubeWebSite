@@ -71,6 +71,20 @@ a.button {
     padding-bottom: 0;
 }
 
+.message {
+    position: sticky;
+    top: 80px;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 25px auto 0;
+}
+
+.message-success {
+    color: #0C1A22;
+    background-color: #47A76A;
+    font-weight: 500;
+}
+
 /* Навбар */
 
 .header {

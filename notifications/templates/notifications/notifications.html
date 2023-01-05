@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block styles %}
+<link rel="stylesheet" href="{% static 'main/css/items_list.css' %}">
 <link rel="stylesheet" href="{% static 'notifications/css/notifications.css' %}">
 {% endblock %}
 
@@ -12,8 +13,17 @@
             <div class="col-lg-10">
                 <div class="col-12">
                     {% for notice in notifications %}
-                    <div class="notice">
+                    <div class="notice-container">
                         <p>{{notice.text}}</p>
+
+                        <ul class="d-flex notice-container-options">
+                            <li class="notice-container-options__item">
+                                <form id="confirm-notice-{{notice.pk}}-form" method="POST" action="{% url "confirm_notice" notice.pk %}">
+                                    {% csrf_token %}
+                                    <a class="notice-container__confirm" href="#" onclick="document.getElementById('confirm-notice-{{notice.pk}}-form').submit();"><i class="bi bi-check-lg"></i></a>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                     {% endfor %}
                 </div>

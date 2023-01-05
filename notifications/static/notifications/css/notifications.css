@@ -1,6 +1,9 @@
-.notice {
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 25px auto 0;
+.notice-container a.notice-container__confirm {
+    color: #0C1A22;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.notice-container-options {
+    margin-top: 10px;
 }

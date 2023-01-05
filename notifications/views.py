@@ -24,7 +24,25 @@ class ShowNotices(LoginRequiredMixin, ListView):
         return context
 
 
-class SendProjectApplication(LoginRequiredMixin, CreateView):
+class ConfirmNotice(DeleteView):
+    model = Notice
+    pk_url_kwarg = 'notice_id'
+
+    def delete(self, request, *args, **kwargs):
+        self.obj = self.get_object()
+
+        if self.obj.to_user.pk == self.request.user.pk or self.request.user.is_superuser():
+            self.success_url = self.get_success_url()
+
+            self.obj.delete()
+
+            return HttpResponseRedirect(self.success_url)
+
+    def get_success_url(self):
+        return reverse_lazy('notifications')
+
+
+class SendProjectApplication(LoginRequiredMixin, NoticeMixin, CreateView):
     form_class = SendProjectApplicationForm
     template_name = 'projects/send_project_application.html'
     success_url = reverse_lazy('projects')
@@ -34,8 +52,10 @@ class SendProjectApplication(LoginRequiredMixin, CreateView):
         self.obj = form.save(commit=False)
         self.obj.user = self.request.user
         self.obj.project = Project.objects.get(slug=self.kwargs['project_slug'])
-
         self.obj.save()
+
+        self.send_notice(user_to=self.obj.project.author, text=f'На ваш проект "{self.obj.project.name}" была подана заявка '
+                                   f'от пользователя {self.request.user}.')
 
         return super().form_valid(form)
 
