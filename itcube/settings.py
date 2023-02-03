@@ -27,7 +27,7 @@ SECRET_KEY = SEC_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['it-cube-django-website-production.up.railway.app']
 
 
 # Application definition
