@@ -3,6 +3,7 @@ environs==9.5.0
 django-simple-captcha==0.5.17
 django-ckeditor==6.5.0
 python-slugify==6.1.2
+gunicorn==20.1.0
 
 
 
