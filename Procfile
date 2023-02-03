@@ -1,0 +1,1 @@
+web: gunicorn itcube.wsgi --log-file -
