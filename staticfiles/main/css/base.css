@@ -1,0 +1,180 @@
+/* Спецификация */
+
+body {
+    color: #0C1A22;
+    background-color: #f0f0f0;
+    font-family: 'Inter', sans-serif;
+}
+
+ul, li {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.user-avatar {
+    border-radius: 4px;
+    height: 24px;
+    width: 24px;
+}
+
+.button {
+    display: inline-block;
+    color: #0C1A22;
+    font-weight: 500;
+    text-align: center;
+    border: 5px solid #e3e6ea;
+    border-radius: 20px;
+    padding: 10px;
+    cursor: pointer;
+    background-image: -webkit-linear-gradient(45deg, #e3e6ea 50%, transparent 50%);
+    background-image: linear-gradient(45deg, #e3e6ea 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+
+.button:hover {
+    background-position: 0;
+}
+
+a.button {
+    color: #0C1A22;
+}
+
+.sidebar {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.sidebar-list__item, .sidebar-list__item a {
+    color: #0C1A22;
+    font-weight: 500;
+}
+
+.sidebar-list__item {
+    padding-bottom: 5px;
+}
+
+.sidebar-list__item:last-child {
+    padding-bottom: 0;
+}
+
+.message {
+    position: sticky;
+    top: 80px;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 25px auto 0;
+}
+
+.message-success {
+    color: #0C1A22;
+    background-color: #47A76A;
+    font-weight: 500;
+}
+
+/* Навбар */
+
+.header {
+    color: #fff;
+    background-color: #24292f;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.menu__title {
+    font-weight: 600;
+    margin: 0;
+}
+
+.menu__btn {
+    background-color: #fff;
+    border: 4px solid #e3e6ea;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.menu__btn:hover, .menu__btn:active {
+    background-color: #e3e6ea;
+}
+
+.menu__link, .menu__link_icon {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 0.5s;
+}
+
+.menu__link:hover {
+    color: white !important;
+}
+
+.user-profile__btn {
+    background-color: inherit;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    padding: 6px;
+    transition: 0.5s;
+}
+
+.user-profile__btn:hover, .profile__btn:focus {
+    border-color: #e3e6ea;
+}
+
+.user-profile__link {
+    font-weight: 500;
+}
+
+/* Контент */
+
+.content {
+    min-height: 82.63vh;
+}
+
+/* Футер */
+
+.footer {
+    background-color: #24292f;
+    padding-bottom: 21.1px;
+}
+
+.info {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.info__creator {
+    margin-top: 10px;
+}
+
+.soc-nets {
+    margin-top: 16px;
+}
+
+.soc-nets__link {
+    color: #fff;
+    font-size: 34px;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.soc-nets__link:hover {
+    color: #fff;
+    font-size: 36px;
+}

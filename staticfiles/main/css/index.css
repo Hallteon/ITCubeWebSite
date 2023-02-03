@@ -1,0 +1,53 @@
+.home {
+    background-color: #fff;
+    padding-top: 20px;
+}
+
+.home-description {
+    text-align: center;
+}
+
+.home-description__title {
+    font-size: 48px;
+    font-weight: 900;
+    margin-top: 100px;
+}
+
+.home-description__image {
+    width: 100%;
+}
+
+.home-description__text {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+a.home-description__button {
+    font-weight: 600;
+    margin-top: 40px;
+}
+
+a.home-description__button:hover {
+    color: #0C1A22;
+}
+
+.home-info {
+    margin-top: 50px;
+}
+
+.home-info-list {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.home-info-list__item {
+    font-size: 18px;
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+@media (max-height: 576px) {
+    .home-description__title {
+        font-size: 36px;
+    }
+}

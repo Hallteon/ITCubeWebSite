@@ -1,0 +1,10 @@
+.projects {
+    margin-bottom: 25px;
+}
+
+.project-container__title {
+    color: #0C1A22;
+    font-size: 20px;
+    font-weight: 600;
+    transition: 0.5s;
+}
